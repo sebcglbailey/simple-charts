@@ -5,6 +5,10 @@
   overflow-y: hidden;
 }
 
+.container.centered .svg {
+  margin: 0 50vw;
+}
+
 .svg {
   height: 100%;
 }

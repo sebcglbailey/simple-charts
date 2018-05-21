@@ -4,14 +4,20 @@ import Snap from 'snapsvg-cjs'
 
 import styles from './styles.css';
 import Func from './functions';
+import Type from './lineTypes';
+
+let defaultData = [0, 20, 50, 25, 75, 60, 100]
 
 class Chart extends Component {
   constructor(props) {
     super(props)
 
+    let data = this.props.data ? this.props.data : defaultData;
+
     this.state = {
-      smallest: Func.getSmallest(this.props.data),
-      largest: Func.getLargest(this.props.data)
+      data: data,
+      smallest: Func.getSmallest(data),
+      largest: Func.getLargest(data)
     }
 
     this.createSnapComponent = this.createSnapComponent.bind(this)
@@ -48,22 +54,31 @@ class Chart extends Component {
 
   plotData() {
 
-    let lineString = this.props.data.map((value, index) => {
-      value = Func.convert(value, this.state.smallest, this.state.largest, this.state.canvasHeight)
+    let straight = Type.straight(
+      this.state.data,
+      this.state.smallest,
+      this.state.largest,
+      this.state.canvasHeight,
+      this.props.xWidth,
+      this.props.margin
+    )
+    let curve = Type.simpleCurve(
+      this.state.data,
+      this.state.smallest,
+      this.state.largest,
+      this.state.canvasHeight,
+      this.props.xWidth,
+      this.props.margin
+    )
 
-      if (this.props.margin) {
-        value += this.props.margin
-      }
-
-      if (index == 0) {
-        return `M0,${this.props.data[0]} L`
-      } else {
-        return `${this.props.xWidth * index},${value} `
-      }
+    let graphS = this.snap.path(straight)
+    graphS.attr({
+      fill: "none",
+      stroke: "#fff"
     })
-    lineString = lineString.join("")
-    let graph = this.snap.path(lineString)
-    graph.attr({
+
+    let graphC = this.snap.path(curve)
+    graphC.attr({
       fill: "none",
       stroke: "#fff"
     })
@@ -71,15 +86,20 @@ class Chart extends Component {
   }
 
   render() {
+
+    let containerClass = this.props.centered ? (
+      `${styles.container} ${styles.centered}`
+    ) : styles.container
+
     return(
       <div
         ref={(elem) => {this.canvas = elem}}
-        className={styles.container}
+        className={containerClass}
       >
         <svg
           className={styles.svg}
           ref={(elem) => {this.svg = elem}}
-          style={{width: this.props.xWidth * (this.props.data.length - 1)}}
+          style={{width: this.props.xWidth * (this.state.data.length - 1)}}
         >
         </svg>
       </div>
@@ -88,7 +108,8 @@ class Chart extends Component {
 }
 
 Chart.defaultProps = {
-  xWidth: 200
+  xWidth: 200,
+  margin: 32
 }
 
 export default Chart
