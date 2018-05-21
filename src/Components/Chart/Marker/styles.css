@@ -1,0 +1,32 @@
+.marker {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background-color: #fff;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.marker::before {
+  content: '';
+  position: absolute;
+  width: 175%;
+  height: 175%;
+  border-radius: 100%;
+  top: -37.5%;
+  left: -37.5%;
+  background-color: inherit;
+  opacity: 0.5;
+}
+
+.marker::after {
+  content: '';
+  position: absolute;
+  width: 250%;
+  height: 250%;
+  border-radius: 100%;
+  top: -75%;
+  left: -75%;
+  background-color: inherit;
+  opacity: 0.25;
+}
