@@ -54,7 +54,6 @@ class Chart extends Component {
   }
 
   hoverSVG(event) {
-    console.log(event)
     let posX = event.offsetX
 
     this.markerHelper.update(posX)
@@ -80,10 +79,12 @@ class Chart extends Component {
     let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
     let posY = intersection ? intersection.y : null
 
-    this.marker.updatePosition({
-      top: posY,
-      left: "50%"
-    })
+    if (intersection) {
+      this.marker.updatePosition({
+        top: posY,
+        left: "50%"
+      })
+    }
 
   }
 
@@ -129,7 +130,7 @@ class Chart extends Component {
       this.props.xWidth,
       this.props.margin
     )
-    let curve = Type.simpleCurve(
+    let curve = Type.strictCurve(
       this.state.data,
       this.state.smallest,
       this.state.largest,
