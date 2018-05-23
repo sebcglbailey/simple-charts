@@ -25,6 +25,8 @@ class Chart extends Component {
       color: "#b356fa"
     }
 
+    this.touch = false
+
     // Bind functions
     this.createSnapComponent = this.createSnapComponent.bind(this)
     this.plotData = this.plotData.bind(this)
@@ -41,7 +43,18 @@ class Chart extends Component {
     if (this.props.marker) {
       this.helper = new Helper
       this.markerHelper = this.helper.build(this.snap, this.canvas.offsetHeight)
+
+      this.canvas.addEventListener("mousemove", this.hoverSVG)
+
+      window.addEventListener("touchstart", () => {
+        this.touch = true
+        this.canvas.removeEventListener("mousemove", () => {
+          console.log("Not listening to mouse move event.")
+        })
+      })
+
     }
+
   }
 
   // Plot the data after the component has mounted
@@ -54,35 +67,50 @@ class Chart extends Component {
   }
 
   hoverSVG(event) {
-    let posX = event.offsetX
 
-    this.markerHelper.update(posX)
+    let posX = event.clientX
+    this.mouseX = posX
+    let mouseX = posX - (this.props.centered ? window.innerWidth/2 : 0) + this.canvas.scrollLeft
+
+    this.markerHelper.update(mouseX)
 
     let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
-    let posY = intersection ? intersection.y : null
+    this.posY = intersection ? intersection.y : this.posY ? this.posY : null
 
-    this.marker.updatePosition({
-      top: posY,
-      left: posX
-    })
+    if (intersection) {
+      this.marker.updatePosition({
+        top: this.posY,
+        left: posX
+      })
+    }
+    
 
   }
 
   getScrollPosition() {
 
-    this.scrollX = this.canvas.scrollLeft
-    this.markerHelper.update(this.scrollX)
+    let posX = this.canvas.scrollLeft
 
-    // let posY = Func.convert(this.props.data[0], this.state.smallest, this.state.largest, this.state.canvasHeight)
-    // posY = this.props.margin ? posY + this.props.margin : posY
+    posX += this.mouseX ? this.mouseX - (this.props.centered ? window.innerWidth/2 : 0) : 0
+
+    this.markerHelper.update(posX)
 
     let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
-    let posY = intersection ? intersection.y : null
+    this.posY = intersection ? intersection.y : this.posY ? this.posY : null
 
     if (intersection) {
       this.marker.updatePosition({
-        top: posY,
-        left: "50%"
+        top: this.posY,
+        left: this.mouseX ? this.mouseX : this.props.centered ? "50%" : 0
+      })
+    } else {
+      this.marker.updatePosition({
+        top: this.posY,
+        left: this.props.centered && this.mouseX < window.innerWidth / 2 ? 
+          (window.innerWidth / 2 - this.canvas.scrollLeft)
+          : this.props.centered && this.mouseX > window.innerWidth / 2 ?
+          (window.innerWidth / 2 + (this.svg.width.baseVal.value - this.canvas.scrollLeft))
+          : this.canvas.scrollLeft
       })
     }
 
@@ -103,15 +131,13 @@ class Chart extends Component {
   createSnapComponent() {
 
     let SVG = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-
+    this.svg = SVG
     this.canvas.appendChild(SVG)
 
     SVG.setAttribute("class", styles.svg)
     SVG.setAttribute("style", `width: ${this.props.xWidth * (this.state.data.length - 1)}px;`)
 
-    if (!this.props.centered) {
-      // document.addEventListener("mouseover", this.hoverSVG)
-    } else {
+    if (this.props.centered) {
       this.canvas.addEventListener("scroll", this.getScrollPosition)
     }
 

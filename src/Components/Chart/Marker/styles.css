@@ -1,8 +1,8 @@
 .marker {
   position: absolute;
-  width: 10px;
-  height: 10px;
-  border-radius: 5px;
+  width: 1em;
+  height: 1em;
+  border-radius: 1em;
   background-color: #fff;
   transform: translateX(-50%) translateY(-50%);
 }
