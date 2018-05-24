@@ -82,6 +82,14 @@ class Chart extends Component {
         top: this.posY,
         left: posX
       })
+
+      let nearest = Func.roundToNearest(mouseX, this.props.xWidth)
+      let index = nearest / this.props.xWidth
+      let val = this.state.data[index]
+      if (val) {
+        this.marker.updateValue(val)
+      }
+
     }
     
 
@@ -103,6 +111,14 @@ class Chart extends Component {
         top: this.posY,
         left: this.mouseX ? this.mouseX : this.props.centered ? "50%" : 0
       })
+
+      let nearest = Func.roundToNearest(posX, this.props.xWidth)
+      let index = nearest / this.props.xWidth
+      let val = this.state.data[index]
+      if (val) {
+        this.marker.updateValue(val)
+      }
+
     } else {
       this.marker.updatePosition({
         top: this.posY,
@@ -148,14 +164,6 @@ class Chart extends Component {
   // Plot the data on the canvas
   plotData() {
 
-    let straight = Type.straight(
-      this.state.data,
-      this.state.smallest,
-      this.state.largest,
-      this.state.canvasHeight,
-      this.props.xWidth,
-      this.props.margin
-    )
     let curve = Type.strictCurve(
       this.state.data,
       this.state.smallest,
@@ -164,12 +172,6 @@ class Chart extends Component {
       this.props.xWidth,
       this.props.margin
     )
-
-    let graphS = this.snap.path(straight)
-    graphS.attr({
-      fill: "none",
-      stroke: "#fff"
-    })
 
     let graphC = this.snap.path(curve)
     graphC.attr({
@@ -197,6 +199,8 @@ class Chart extends Component {
           <Marker
             ref={(elem) => {this.marker = elem}}
             color={this.state.color}
+            value={this.state.data ? this.state.data[0] : null}
+            label="Score"
           />
         ) : null}
       </div>

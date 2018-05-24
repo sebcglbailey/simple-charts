@@ -30,3 +30,21 @@
   background-color: inherit;
   opacity: 0.25;
 }
+
+.labels {
+  color: #fff;
+  font-family: Arial, sans-serif;
+  position: relative;
+}
+
+.value {
+  font-size: 21pt;
+  font-weight: 100;
+}
+
+.label {
+  font-size: 10pt;
+  white-space: nowrap;
+  margin-top: 2pt;
+  font-weight: 600;
+}

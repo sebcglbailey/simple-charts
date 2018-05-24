@@ -4,6 +4,18 @@ const Functions = {
     return Functions.modulate(value, [min, max], [height, 0])
   },
 
+  roundToNearest: (value, nearest) => {
+
+    let rem = value%nearest
+
+    if (rem < nearest/2) {
+      return value - rem
+    } else {
+      return value + (nearest - rem)
+    }
+
+  },
+
   getSmallest: (array) => {
     let smallestValue = array[0]
 
