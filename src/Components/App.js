@@ -34,7 +34,6 @@ const App = () => {
     <div className={styles.container}>
 		  <Chart
         data={testData}
-        centered
         marker
       />
     </div>

@@ -153,9 +153,7 @@ class Chart extends Component {
     SVG.setAttribute("class", styles.svg)
     SVG.setAttribute("style", `width: ${this.props.xWidth * (this.state.data.length - 1)}px;`)
 
-    if (this.props.centered) {
-      this.canvas.addEventListener("scroll", this.getScrollPosition)
-    }
+    this.canvas.addEventListener("scroll", this.getScrollPosition)
 
     this.snap = Snap(SVG)
 
