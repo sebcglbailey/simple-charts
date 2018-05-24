@@ -25,6 +25,7 @@ class Chart extends Component {
       data: data,
       smallest: Func.getSmallest(data),
       largest: Func.getLargest(data),
+      xWidth: this.props.xWidth,
       color: "#b356fa"
     }
 
@@ -79,7 +80,10 @@ class Chart extends Component {
     let snap = Snap(this.svg)
     
     this.snap = snap
-    this.setState({ snap: snap })
+    this.setState({
+      snap: snap,
+      svgWidth: this.props.xWidth * (this.state.data.length - 1)
+    })
 
   }
 
@@ -98,10 +102,19 @@ class Chart extends Component {
       this.props.margin
     )
 
-    this.currentLine.animate({
+    this.currentLine.attr({
       d: newCurve
-    }, 800, mina.easeinout)
-    this.svg.setAttribute("style", `width: ${xWidth * (this.state.data.length - 1)}px;`)
+    })
+
+    let currentWidth = this.state.xWidth * (this.state.data.length - 1)
+    let newWidth = xWidth * (this.state.data.length - 1)
+    let newScroll = Func.modulate(this.canvasNode.scrollLeft, [0, currentWidth], [0, newWidth])
+
+    this.setState({
+      xWidth: xWidth,
+      svgWidth: xWidth * (this.state.data.length - 1),
+      canvasScroll: newScroll
+    })
 
   }
 
@@ -142,8 +155,8 @@ class Chart extends Component {
       posLeft -= posX - this.svg.width.baseVal.value
     }
 
-    let nearest = Func.roundToNearest(posX, this.props.xWidth)
-    let index = nearest / this.props.xWidth
+    let nearest = Func.roundToNearest(posX, this.state.xWidth)
+    let index = nearest / this.state.xWidth
     let val = this.state.data[index]
 
     this.marker.updatePosition({
@@ -168,11 +181,12 @@ class Chart extends Component {
         }}
         centered={this.props.centered}
         updateHelper={this.updateHelper}
+        scrollLeft={this.state.canvasScroll}
       >
         <SVG
           ref={(elem) => {this.svg = elem ? elem.elem : null}}
           snap={this.state.snap}
-          width={this.props.xWidth * (this.state.data.length - 1)}
+          width={this.state.svgWidth}
         />
         {this.props.marker ? (
           <Marker

@@ -23,16 +23,22 @@ class Canvas extends Component {
     this.elem.addEventListener("scroll", this.getScrollPosition)
     this.elem.addEventListener("mousemove", this.getHoverPosition)
 
-    window.addEventListener("touchstart", () => {
+    window.addEventListener("touch", () => {
       this.touch = true
-      this.elem.removeEventListener("mousemove", () => {
-        return
-      })
+      this.elem.removeEventListener("mousemove", this.getHoverPosition)
     })
 
   }
 
-  getScrollPosition() {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.scrollLeft !== this.props.scrollLeft) {
+      setTimeout(() => {
+        this.elem.scrollLeft = nextProps.scrollLeft
+      }, 0)
+    }
+  }
+
+  getScrollPosition(event) {
 
     let helperX = this.elem.scrollLeft
 

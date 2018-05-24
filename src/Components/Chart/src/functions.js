@@ -1,3 +1,11 @@
+
+Math.easeInOutQuad = function (t, b, c, d) {
+  t /= d/2;
+  if (t < 1) return c/2*t*t + b;
+  t--;
+  return -c/2 * (t*(t-2) - 1) + b;
+};
+
 const Functions = {
 
   convert: (value, min, max, height) => {
@@ -62,6 +70,23 @@ const Functions = {
     }
 
     return result;
+  },
+
+  scrollTo: (element, to, duration) => {
+    let start = element.scrollLeft,
+        change = to - start,
+        currentTime = 0,
+        increment = 20;
+        
+    let animateScroll = () => {        
+        currentTime += increment;
+        let val = Math.easeInOutQuad(currentTime, start, change, duration);
+        element.scrollLeft = val;
+        if(currentTime < duration) {
+            setTimeout(animateScroll, increment);
+        }
+    };
+    animateScroll();
   }
 
 }
