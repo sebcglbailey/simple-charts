@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import Snap from 'snapsvg-cjs';
 
+import Canvas from '../Canvas/';
+import SVG from '../SVG/';
+import Line from '../Line/';
 import Marker, { Helper } from '../Marker/';
 
 import styles from './styles.css';
@@ -33,6 +36,8 @@ class Chart extends Component {
     this.getHeight = this.getHeight.bind(this)
     this.getScrollPosition = this.getScrollPosition.bind(this)
     this.hoverSVG = this.hoverSVG.bind(this)
+    this.switchToYears = this.switchToYears.bind(this)
+    this.updateHelper = this.updateHelper.bind(this)
   }
 
   // Setup snap component and canvas height
@@ -44,16 +49,18 @@ class Chart extends Component {
       this.helper = new Helper
       this.markerHelper = this.helper.build(this.snap, this.canvas.offsetHeight)
 
-      this.canvas.addEventListener("mousemove", this.hoverSVG)
+      // this.canvas.addEventListener("mousemove", this.hoverSVG)
 
-      window.addEventListener("touchstart", () => {
-        this.touch = true
-        this.canvas.removeEventListener("mousemove", () => {
-          console.log("Not listening to mouse move event.")
-        })
-      })
+      // window.addEventListener("touchstart", () => {
+      //   this.touch = true
+      //   this.canvas.removeEventListener("mousemove", () => {
+      //     console.log("Not listening to mouse move event.")
+      //   })
+      // })
 
     }
+
+    this.canvas.addEventListener("click", this.switchToYears)
 
   }
 
@@ -146,16 +153,34 @@ class Chart extends Component {
   // Create the snap element (canvas)
   createSnapComponent() {
 
-    let SVG = document.createElementNS("http://www.w3.org/2000/svg", "svg")
-    this.svg = SVG
-    this.canvas.appendChild(SVG)
+    // this.canvas.addEventListener("scroll", this.getScrollPosition)
 
-    SVG.setAttribute("class", styles.svg)
-    SVG.setAttribute("style", `width: ${this.props.xWidth * (this.state.data.length - 1)}px;`)
+    let snap = Snap(this.svg)
+    
+    this.snap = snap
+    this.setState({ snap: snap })
 
-    this.canvas.addEventListener("scroll", this.getScrollPosition)
+  }
 
-    this.snap = Snap(SVG)
+  switchToYears() {
+
+    this.years = this.years !== undefined ? !this.years : true
+
+    let xWidth = this.years ? this.props.xWidth / 6 : this.props.xWidth
+
+    let newCurve = Type.strictCurve(
+      this.state.data,
+      this.state.smallest,
+      this.state.largest,
+      this.state.canvasHeight,
+      xWidth,
+      this.props.margin
+    )
+
+    this.currentLine.animate({
+      d: newCurve
+    }, 800, mina.easeinout)
+    this.svg.setAttribute("style", `width: ${xWidth * (this.state.data.length - 1)}px;`)
 
   }
 
@@ -181,18 +206,26 @@ class Chart extends Component {
 
   }
 
+  updateHelper(posX) {
+
+    this.markerHelper.update(posX)
+
+  }
+
   // Render component
   render() {
 
-    let containerClass = this.props.centered ? (
-      `${styles.container} ${styles.centered}`
-    ) : styles.container
-
     return(
-      <div
-        ref={(elem) => {this.canvas = elem}}
-        className={containerClass}
+      <Canvas
+        ref={(elem) => {this.canvas = elem ? elem.elem : null}}
+        centered={this.props.centered}
+        updateHelper={this.updateHelper}
       >
+        <SVG
+          ref={(elem) => {this.svg = elem ? elem.elem : null}}
+          snap={this.state.snap}
+          width={this.props.xWidth * (this.state.data.length - 1)}
+        />
         {this.props.marker ? (
           <Marker
             ref={(elem) => {this.marker = elem}}
@@ -201,7 +234,7 @@ class Chart extends Component {
             label="Score"
           />
         ) : null}
-      </div>
+      </Canvas>
     )
   }
 }
