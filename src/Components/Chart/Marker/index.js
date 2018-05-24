@@ -31,13 +31,23 @@ class Marker extends Component {
 
   updatePosition(position) {
 
-    this.setState({
+    if (position.top) {
+      this.setState({
         style: {
           backgroundColor: this.props.color,
           top: position.top,
           left: position.left
         }
       })
+    } else {
+      this.setState({
+        style: {
+          backgroundColor: this.props.color,
+          top: this.state.style.top,
+          left: position.left
+        }
+      })
+    }
 
   }
 

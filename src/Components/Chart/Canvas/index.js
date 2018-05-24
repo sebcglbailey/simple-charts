@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Line from '../Line/';
+
 import styles from './styles.css';
 
 class Canvas extends Component {
@@ -37,7 +39,7 @@ class Canvas extends Component {
     helperX += this.mouseX ? this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) : 0
 
     if (this.props.updateHelper) {
-      this.props.updateHelper(helperX)
+      this.props.updateHelper(helperX, this.elem.scrollLeft)
     }
 
   }
@@ -49,7 +51,7 @@ class Canvas extends Component {
     let helperX = this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) + this.elem.scrollLeft
 
     if (this.props.updateHelper) {
-      this.props.updateHelper(helperX)
+      this.props.updateHelper(helperX, this.elem.scrollLeft)
     }
 
   }

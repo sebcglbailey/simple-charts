@@ -34,10 +34,9 @@ class Chart extends Component {
     this.createSnapComponent = this.createSnapComponent.bind(this)
     this.plotData = this.plotData.bind(this)
     this.getHeight = this.getHeight.bind(this)
-    this.getScrollPosition = this.getScrollPosition.bind(this)
-    this.hoverSVG = this.hoverSVG.bind(this)
     this.switchToYears = this.switchToYears.bind(this)
     this.updateHelper = this.updateHelper.bind(this)
+    this.updateMarker = this.updateMarker.bind(this)
   }
 
   // Setup snap component and canvas height
@@ -47,20 +46,10 @@ class Chart extends Component {
 
     if (this.props.marker) {
       this.helper = new Helper
-      this.markerHelper = this.helper.build(this.snap, this.canvas.offsetHeight)
-
-      // this.canvas.addEventListener("mousemove", this.hoverSVG)
-
-      // window.addEventListener("touchstart", () => {
-      //   this.touch = true
-      //   this.canvas.removeEventListener("mousemove", () => {
-      //     console.log("Not listening to mouse move event.")
-      //   })
-      // })
-
+      this.markerHelper = this.helper.build(this.snap, this.canvasNode.offsetHeight)
     }
 
-    this.canvas.addEventListener("click", this.switchToYears)
+    this.canvasNode.addEventListener("click", this.switchToYears)
 
   }
 
@@ -70,78 +59,12 @@ class Chart extends Component {
       this.plotData()
     }
 
-    this.getScrollPosition()
-  }
-
-  hoverSVG(event) {
-
-    let posX = event.clientX
-    this.mouseX = posX
-    let mouseX = posX - (this.props.centered ? window.innerWidth/2 : 0) + this.canvas.scrollLeft
-
-    this.markerHelper.update(mouseX)
-
-    let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
-    this.posY = intersection ? intersection.y : this.posY ? this.posY : null
-
-    if (intersection) {
-      this.marker.updatePosition({
-        top: this.posY,
-        left: posX
-      })
-
-      let nearest = Func.roundToNearest(mouseX, this.props.xWidth)
-      let index = nearest / this.props.xWidth
-      let val = this.state.data[index]
-      if (val) {
-        this.marker.updateValue(val)
-      }
-
-    }
-    
-
-  }
-
-  getScrollPosition() {
-
-    let posX = this.canvas.scrollLeft
-
-    posX += this.mouseX ? this.mouseX - (this.props.centered ? window.innerWidth/2 : 0) : 0
-
-    this.markerHelper.update(posX)
-
-    let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
-    this.posY = intersection ? intersection.y : this.posY ? this.posY : null
-
-    if (intersection) {
-      this.marker.updatePosition({
-        top: this.posY,
-        left: this.mouseX ? this.mouseX : this.props.centered ? "50%" : 0
-      })
-
-      let nearest = Func.roundToNearest(posX, this.props.xWidth)
-      let index = nearest / this.props.xWidth
-      let val = this.state.data[index]
-      if (val) {
-        this.marker.updateValue(val)
-      }
-
-    } else {
-      this.marker.updatePosition({
-        top: this.posY,
-        left: this.props.centered && this.mouseX < window.innerWidth / 2 ? 
-          (window.innerWidth / 2 - this.canvas.scrollLeft)
-          : this.props.centered && this.mouseX > window.innerWidth / 2 ?
-          (window.innerWidth / 2 + (this.svg.width.baseVal.value - this.canvas.scrollLeft))
-          : this.canvas.scrollLeft
-      })
-    }
-
+    this.canvas.getScrollPosition()
   }
 
   // Get the height of the canvas
   getHeight() {
-    let canvasHeight = this.canvas.offsetHeight
+    let canvasHeight = this.canvasNode.offsetHeight
 
     if (this.props.margin) {
       canvasHeight -= this.props.margin*2
@@ -152,8 +75,6 @@ class Chart extends Component {
 
   // Create the snap element (canvas)
   createSnapComponent() {
-
-    // this.canvas.addEventListener("scroll", this.getScrollPosition)
 
     let snap = Snap(this.svg)
     
@@ -187,28 +108,52 @@ class Chart extends Component {
   // Plot the data on the canvas
   plotData() {
 
-    let curve = Type.strictCurve(
-      this.state.data,
-      this.state.smallest,
-      this.state.largest,
-      this.state.canvasHeight,
-      this.props.xWidth,
-      this.props.margin
-    )
-
-    let graphC = this.snap.path(curve)
-    graphC.attr({
-      fill: "none",
-      stroke: "#00f"
+    let curve = new Line({
+      data: this.state.data,
+      smallest: this.state.smallest,
+      largest: this.state.largest,
+      canvasHeight: this.state.canvasHeight,
+      xWidth: this.props.xWidth,
+      margin: this.props.margin,
+      snap: this.snap
     })
 
-    this.currentLine = graphC
+    this.currentLine = curve.line
 
   }
 
-  updateHelper(posX) {
+  updateHelper(posX, scroll) {
 
     this.markerHelper.update(posX)
+    this.updateMarker(posX, scroll)
+
+  }
+
+  updateMarker(posX, scroll) {
+
+    let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
+    let posY = intersection ? intersection.y : null
+    let posLeft = posX - scroll
+    posLeft += this.props.centered ? window.innerWidth / 2 : 0
+
+    if (posX < 0) {
+      posLeft -= posX
+    } else if (posX > this.svg.width.baseVal.value) {
+      posLeft -= posX - this.svg.width.baseVal.value
+    }
+
+    let nearest = Func.roundToNearest(posX, this.props.xWidth)
+    let index = nearest / this.props.xWidth
+    let val = this.state.data[index]
+
+    this.marker.updatePosition({
+      top: posY,
+      left: posLeft
+    })
+
+    if (val) {
+      this.marker.updateValue(val)
+    }
 
   }
 
@@ -217,7 +162,10 @@ class Chart extends Component {
 
     return(
       <Canvas
-        ref={(elem) => {this.canvas = elem ? elem.elem : null}}
+        ref={(elem) => {
+          this.canvasNode = elem ? elem.elem : null
+          this.canvas = elem ? elem : null
+        }}
         centered={this.props.centered}
         updateHelper={this.updateHelper}
       >

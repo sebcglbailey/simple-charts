@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import Snap from 'snapsvg-cjs';
 
+import Type from '../src/lineTypes';
+
 import styles from './styles.css';
 
-class Line extends Component {
+class Line {
   constructor(props) {
-    super(props)
 
     this.state = {
-      data: this.props.data,
-      smallest: this.props.smallest,
-      largest: this.props.largest,
-      canvasHeight: this.props.canvasHeight,
-      xWidth: this.props.xWidth,
-      margin: this.props.margin
+      data: props.data,
+      smallest: props.smallest,
+      largest: props.largest,
+      canvasHeight: props.canvasHeight,
+      xWidth: props.xWidth,
+      margin: props.margin,
+      snap: props.snap
     }
 
-    this.plotData = this.plotData.bind(this)
+    this.plotData()
+
   }
 
   // Plot the data on the canvas
