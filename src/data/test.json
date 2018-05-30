@@ -1,0 +1,2071 @@
+{
+    "index": {
+        "minYear": 2007,
+        "minMonth": 3,
+        "maxYear": 2016,
+        "maxMonth": 9
+    },
+    "data": [
+        {
+            "name": "score",
+            "values": [
+                {
+                    "score": 510,
+                    "scoreFactorsPositive": 5,
+                    "scoreFactorsNegative": 3,
+                    "type": "score",
+                    "year": 2015,
+                    "month": 11
+                },
+                {
+                    "score": 510,
+                    "scoreDelta": 0,
+                    "scoreFactorsPositive": 5,
+                    "scoreFactorsNegative": 3,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2015,
+                    "month": 12
+                },
+                {
+                    "score": 510,
+                    "scoreDelta": 0,
+                    "scoreFactorsPositive": 6,
+                    "scoreFactorsNegative": 2,
+                    "scoreFactorsPositiveDelta": 1,
+                    "scoreFactorsNegativeDelta": -1,
+                    "events": [
+                        {
+                            "type": "NEW_POSITIVE",
+                            "text": "You have been on the <strong>Electoral Roll</strong> at your current address for a long time"
+                        }
+                    ],
+                    "type": "score",
+                    "year": 2016,
+                    "month": 1
+                },
+                {
+                    "score": 510,
+                    "scoreDelta": 0,
+                    "scoreFactorsPositive": 6,
+                    "scoreFactorsNegative": 2,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 2
+                },
+                {
+                    "score": 510,
+                    "scoreDelta": 0,
+                    "scoreFactorsPositive": 6,
+                    "scoreFactorsNegative": 2,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 3
+                },
+                {
+                    "score": 487,
+                    "scoreDelta": -23,
+                    "scoreFactorsPositive": 6,
+                    "scoreFactorsNegative": 2,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 4
+                },
+                {
+                    "score": 408,
+                    "scoreDelta": -79,
+                    "scoreFactorsPositive": 5,
+                    "scoreFactorsNegative": 2,
+                    "scoreFactorsPositiveDelta": -1,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 5
+                },
+                {
+                    "score": 487,
+                    "scoreDelta": 79,
+                    "scoreFactorsPositive": 8,
+                    "scoreFactorsNegative": 0,
+                    "scoreFactorsPositiveDelta": 3,
+                    "scoreFactorsNegativeDelta": -2,
+                    "events": [
+                        {
+                            "type": "NEW_POSITIVE",
+                            "text": "Your current <strong>Telecoms</strong> balance is relatively low"
+                        },
+                        {
+                            "type": "NEW_POSITIVE",
+                            "text": "Your largest <strong>credit card limit</strong> is relatively high"
+                        },
+                        {
+                            "type": "NEW_POSITIVE",
+                            "text": "You have held at least one of your accounts for several years"
+                        }
+                    ],
+                    "type": "score",
+                    "year": 2016,
+                    "month": 6
+                },
+                {
+                    "score": 508,
+                    "scoreDelta": 21,
+                    "scoreFactorsPositive": 9,
+                    "scoreFactorsNegative": 0,
+                    "scoreFactorsPositiveDelta": 1,
+                    "scoreFactorsNegativeDelta": 0,
+                    "events": [
+                        {
+                            "type": "NEW_POSITIVE",
+                            "text": "Your total <strong>credit card % utilisation</strong> is relatively low"
+                        }
+                    ],
+                    "type": "score",
+                    "year": 2016,
+                    "month": 7
+                },
+                {
+                    "score": 508,
+                    "scoreDelta": 0,
+                    "scoreFactorsPositive": 9,
+                    "scoreFactorsNegative": 0,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 8
+                },
+                {
+                    "score": 514,
+                    "scoreDelta": 6,
+                    "scoreFactorsPositive": 9,
+                    "scoreFactorsNegative": 0,
+                    "scoreFactorsPositiveDelta": 0,
+                    "scoreFactorsNegativeDelta": 0,
+                    "type": "score",
+                    "year": 2016,
+                    "month": 9
+                }
+            ]
+        },
+        {
+            "name": "shortTerm",
+            "values": [
+                {
+                    "balance": 12000,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 4
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 5
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 6
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 7
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 8
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 9
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 10
+                },
+                {
+                    "balance": 0,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "O2 (I)",
+                            "text": "You opened a <strong>O2 (I)</strong> account",
+                            "contextKey": "ACCOUNT_O21006757343"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 11
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2007,
+                    "month": 12
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 1
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 2
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 3
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 4
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 5
+                },
+                {
+                    "balance": 1010,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 6
+                },
+                {
+                    "balance": 569,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 7
+                },
+                {
+                    "balance": 837,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 8
+                },
+                {
+                    "balance": 942,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 9
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 10
+                },
+                {
+                    "balance": 926,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "O2 (I)",
+                            "text": "You opened a <strong>O2 (I)</strong> account",
+                            "contextKey": "ACCOUNT_O21008831254"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 11
+                },
+                {
+                    "balance": 550,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2008,
+                    "month": 12
+                },
+                {
+                    "balance": 778,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 1
+                },
+                {
+                    "balance": 504,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 2
+                },
+                {
+                    "balance": 740,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 3
+                },
+                {
+                    "balance": 944,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 4
+                },
+                {
+                    "balance": 468,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 5
+                },
+                {
+                    "balance": 734,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 6
+                },
+                {
+                    "balance": 958,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 7
+                },
+                {
+                    "balance": 686,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 8
+                },
+                {
+                    "balance": 914,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 9
+                },
+                {
+                    "balance": 845,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 10
+                },
+                {
+                    "balance": 984,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 11
+                },
+                {
+                    "balance": 1013,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2009,
+                    "month": 12
+                },
+                {
+                    "balance": 66,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 1
+                },
+                {
+                    "balance": 319,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 2
+                },
+                {
+                    "balance": 50,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 3
+                },
+                {
+                    "balance": 679,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 4
+                },
+                {
+                    "balance": 400,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "HUTCHISON 3G UK LTD(I)",
+                            "text": "You opened a <strong>HUTCHISON 3G UK LTD(I)</strong> account",
+                            "contextKey": "ACCOUNT_Hutchison3gUK9440639392"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 5
+                },
+                {
+                    "balance": 627,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 6
+                },
+                {
+                    "balance": 852,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 7
+                },
+                {
+                    "balance": 878,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 8
+                },
+                {
+                    "balance": 908,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 9
+                },
+                {
+                    "balance": 940,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 10
+                },
+                {
+                    "balance": 971,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 11
+                },
+                {
+                    "balance": 1005,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2010,
+                    "month": 12
+                },
+                {
+                    "balance": 1018,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "O2 (I)",
+                            "text": "You closed your <strong>O2 (I)</strong> account",
+                            "contextKey": "ACCOUNT_O21008831254"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 1
+                },
+                {
+                    "balance": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "O2 (I)",
+                            "text": "You closed your <strong>O2 (I)</strong> account",
+                            "contextKey": "ACCOUNT_O21006757343"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 2
+                },
+                {
+                    "balance": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "NATWEST BANK CURRENT ACCOUNTS (I)",
+                            "text": "You closed your <strong>NATWEST BANK CURRENT ACCOUNTS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest600704454012250204"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 3
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 4
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 5
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 6
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 7
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 8
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 9
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 10
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 11
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2011,
+                    "month": 12
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 1
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 2
+                },
+                {
+                    "balance": 0,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "HUTCHISON 3G UK LTD(I)",
+                            "text": "You opened a <strong>HUTCHISON 3G UK LTD(I)</strong> account",
+                            "contextKey": "ACCOUNT_Hutchison3gUK9540942183"
+                        }
+                    ],
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 3
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 4
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 5
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 6
+                },
+                {
+                    "balance": 0,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 7
+                },
+                {
+                    "balance": -26,
+                    "ccSpending": 0,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 8
+                },
+                {
+                    "balance": 4282,
+                    "limit": 3500,
+                    "utilisation": 122.34286,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "T-MOBILE BROUGHT TO YOU BY EE (I)",
+                            "text": "You opened a <strong>T-MOBILE BROUGHT TO YOU BY EE (I)</strong> account",
+                            "contextKey": "ACCOUNT_TMobile018663318"
+                        },
+                        {
+                            "type": "MIN_PAYMENT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You made a minimum payment on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 3500,
+                    "ccSpending": 3779,
+                    "ccBalance": 3779,
+                    "ccPayment": 1366,
+                    "ccUtilisation": 107.97143,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 9
+                },
+                {
+                    "balance": 3142,
+                    "limit": 3500,
+                    "utilisation": 89.77143,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 3500,
+                    "ccSpending": 1895,
+                    "ccBalance": 4308,
+                    "ccPayment": 2591,
+                    "ccUtilisation": 123.08572,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 10
+                },
+                {
+                    "balance": 1888,
+                    "limit": 4500,
+                    "utilisation": 41.955555,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "HUTCHISON 3G UK LTD(I)",
+                            "text": "You closed your <strong>HUTCHISON 3G UK LTD(I)</strong> account",
+                            "contextKey": "ACCOUNT_Hutchison3gUK9440639392"
+                        },
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "T-MOBILE BROUGHT TO YOU BY EE (I)",
+                            "text": "You closed your <strong>T-MOBILE BROUGHT TO YOU BY EE (I)</strong> account",
+                            "contextKey": "ACCOUNT_TMobile018663318"
+                        },
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You changed the limit on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 4500,
+                    "ccSpending": 1425,
+                    "ccBalance": 3142,
+                    "ccPayment": 3013,
+                    "ccUtilisation": 69.82222,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 11
+                },
+                {
+                    "balance": 6219,
+                    "limit": 4500,
+                    "utilisation": 138.2,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "EE LIMITED (I)",
+                            "text": "You opened a <strong>EE LIMITED (I)</strong> account",
+                            "contextKey": "ACCOUNT_EE100173089"
+                        },
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You made a late payment on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        },
+                        {
+                            "type": "MIN_PAYMENT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You made a minimum payment on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 4500,
+                    "ccSpending": 1759,
+                    "ccBalance": 1888,
+                    "ccPayment": 19,
+                    "ccUtilisation": 41.955555,
+                    "type": "shortTerm",
+                    "year": 2012,
+                    "month": 12
+                },
+                {
+                    "balance": 1256,
+                    "limit": 4500,
+                    "utilisation": 27.911112,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 4500,
+                    "ccSpending": 3848,
+                    "ccBalance": 5717,
+                    "ccPayment": 7415,
+                    "ccUtilisation": 127.04444,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 1
+                },
+                {
+                    "balance": 2795,
+                    "limit": 4500,
+                    "utilisation": 62.11111,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 4500,
+                    "ccSpending": 1053,
+                    "ccBalance": 1053,
+                    "ccPayment": 2683,
+                    "ccUtilisation": 23.4,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 2
+                },
+                {
+                    "balance": 2287,
+                    "limit": 4500,
+                    "utilisation": 50.822224,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 4500,
+                    "ccSpending": 2662,
+                    "ccBalance": 2662,
+                    "ccPayment": 3583,
+                    "ccUtilisation": 59.155556,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 3
+                },
+                {
+                    "balance": 3118,
+                    "limit": 4500,
+                    "utilisation": 69.28889,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 4500,
+                    "ccSpending": 2071,
+                    "ccBalance": 2071,
+                    "ccPayment": 3138,
+                    "ccUtilisation": 46.02222,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 4
+                },
+                {
+                    "balance": 3071,
+                    "limit": 6500,
+                    "utilisation": 47.246155,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You made a late payment on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        },
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You changed the limit on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        }
+                    ],
+                    "ccLimit": 6500,
+                    "ccSpending": 2751,
+                    "ccBalance": 2751,
+                    "ccPayment": 2505,
+                    "ccUtilisation": 42.32308,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 5
+                },
+                {
+                    "balance": 4649,
+                    "limit": 8500,
+                    "utilisation": 54.69412,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You changed the limit on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 8500,
+                    "ccSpending": 2922,
+                    "ccBalance": 3168,
+                    "ccPayment": 5162,
+                    "ccUtilisation": 37.270588,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 6
+                },
+                {
+                    "balance": 3981,
+                    "limit": 8500,
+                    "utilisation": 46.835293,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 8500,
+                    "ccSpending": 4602,
+                    "ccBalance": 4602,
+                    "ccPayment": 4014,
+                    "ccUtilisation": 54.14118,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 7
+                },
+                {
+                    "balance": 4324,
+                    "limit": 8500,
+                    "utilisation": 50.870586,
+                    "cashAdvancesNum": 1,
+                    "cashAdvancesTotal": 30,
+                    "ccLimit": 8500,
+                    "ccSpending": 3194,
+                    "ccBalance": 3782,
+                    "ccPayment": 4330,
+                    "ccUtilisation": 44.494118,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 8
+                },
+                {
+                    "balance": 7869,
+                    "limit": 8500,
+                    "utilisation": 92.57647,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 8500,
+                    "ccSpending": 4142,
+                    "ccBalance": 4142,
+                    "ccPayment": 3589,
+                    "ccUtilisation": 48.729412,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 9
+                },
+                {
+                    "balance": 4136,
+                    "limit": 8500,
+                    "utilisation": 48.658825,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 8500,
+                    "ccSpending": 7193,
+                    "ccBalance": 7746,
+                    "ccPayment": 6201,
+                    "ccUtilisation": 91.12941,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 10
+                },
+                {
+                    "balance": 5631,
+                    "limit": 11400,
+                    "utilisation": 49.394737,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You changed the limit on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        }
+                    ],
+                    "ccLimit": 11400,
+                    "ccSpending": 2487,
+                    "ccBalance": 4032,
+                    "ccPayment": 3406,
+                    "ccUtilisation": 35.36842,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 11
+                },
+                {
+                    "balance": 4035,
+                    "limit": 11400,
+                    "utilisation": 35.394737,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 11400,
+                    "ccSpending": 4850,
+                    "ccBalance": 5476,
+                    "ccPayment": 4423,
+                    "ccUtilisation": 48.035088,
+                    "type": "shortTerm",
+                    "year": 2013,
+                    "month": 12
+                },
+                {
+                    "balance": 2758,
+                    "limit": 14600,
+                    "utilisation": 18.890411,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "HUTCHISON 3G UK LTD(I)",
+                            "text": "You closed your <strong>HUTCHISON 3G UK LTD(I)</strong> account",
+                            "contextKey": "ACCOUNT_Hutchison3gUK9540942183"
+                        },
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You changed the limit on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 14600,
+                    "ccSpending": 2803,
+                    "ccBalance": 3856,
+                    "ccPayment": 4194,
+                    "ccUtilisation": 26.41096,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 1
+                },
+                {
+                    "balance": 3959,
+                    "limit": 14600,
+                    "utilisation": 27.116438,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 2599,
+                    "ccBalance": 2599,
+                    "ccPayment": 3600,
+                    "ccUtilisation": 17.80137,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 2
+                },
+                {
+                    "balance": 3319,
+                    "limit": 14600,
+                    "utilisation": 22.732876,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 3831,
+                    "ccBalance": 3831,
+                    "ccPayment": 3925,
+                    "ccUtilisation": 26.239725,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 3
+                },
+                {
+                    "balance": 5836,
+                    "limit": 14600,
+                    "utilisation": 39.972603,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 3193,
+                    "ccBalance": 3193,
+                    "ccPayment": 4383,
+                    "ccUtilisation": 21.869864,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 4
+                },
+                {
+                    "balance": 14510,
+                    "limit": 14600,
+                    "utilisation": 99.38356,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 5527,
+                    "ccBalance": 5527,
+                    "ccPayment": 5049,
+                    "ccUtilisation": 37.856163,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 5
+                },
+                {
+                    "balance": 10325,
+                    "limit": 14600,
+                    "utilisation": 70.71918,
+                    "cashAdvancesNum": 2,
+                    "cashAdvancesTotal": 70,
+                    "ccLimit": 14600,
+                    "ccSpending": 13873,
+                    "ccBalance": 14351,
+                    "ccPayment": 11500,
+                    "ccUtilisation": 98.29452,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 6
+                },
+                {
+                    "balance": 9746,
+                    "limit": 14600,
+                    "utilisation": 66.753426,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 7343,
+                    "ccBalance": 10194,
+                    "ccPayment": 5124,
+                    "ccUtilisation": 69.821915,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 7
+                },
+                {
+                    "balance": 9003,
+                    "limit": 14600,
+                    "utilisation": 61.664383,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 4583,
+                    "ccBalance": 9653,
+                    "ccPayment": 4400,
+                    "ccUtilisation": 66.11644,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 8
+                },
+                {
+                    "balance": 9646,
+                    "limit": 14600,
+                    "utilisation": 66.0685,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 3637,
+                    "ccBalance": 8890,
+                    "ccPayment": 5800,
+                    "ccUtilisation": 60.89041,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 9
+                },
+                {
+                    "balance": 9204,
+                    "limit": 14600,
+                    "utilisation": 63.041096,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 6556,
+                    "ccBalance": 9646,
+                    "ccPayment": 4000,
+                    "ccUtilisation": 66.0685,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 10
+                },
+                {
+                    "balance": 10055,
+                    "limit": 14600,
+                    "utilisation": 68.869865,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 14600,
+                    "ccSpending": 3558,
+                    "ccBalance": 9204,
+                    "ccPayment": 5000,
+                    "ccUtilisation": 63.041096,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 11
+                },
+                {
+                    "balance": 10657,
+                    "limit": 23600,
+                    "utilisation": 45.15678,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You changed the limit on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        },
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You changed the limit on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 23600,
+                    "ccSpending": 5806,
+                    "ccBalance": 10010,
+                    "ccPayment": 4108,
+                    "ccUtilisation": 42.415253,
+                    "type": "shortTerm",
+                    "year": 2014,
+                    "month": 12
+                },
+                {
+                    "balance": 12979,
+                    "limit": 23600,
+                    "utilisation": 54.99576,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 4755,
+                    "ccBalance": 10657,
+                    "ccPayment": 2131,
+                    "ccUtilisation": 45.15678,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 1
+                },
+                {
+                    "balance": 15652,
+                    "limit": 23600,
+                    "utilisation": 66.32204,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 4453,
+                    "ccBalance": 12979,
+                    "ccPayment": 4072,
+                    "ccUtilisation": 54.99576,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 2
+                },
+                {
+                    "balance": 10265,
+                    "limit": 23600,
+                    "utilisation": 43.49576,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 6745,
+                    "ccBalance": 15652,
+                    "ccPayment": 9218,
+                    "ccUtilisation": 66.32204,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 3
+                },
+                {
+                    "balance": 8490,
+                    "limit": 23600,
+                    "utilisation": 35.974575,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 3831,
+                    "ccBalance": 10265,
+                    "ccPayment": 5954,
+                    "ccUtilisation": 43.49576,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 4
+                },
+                {
+                    "balance": 12610,
+                    "limit": 23600,
+                    "utilisation": 53.432205,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 4179,
+                    "ccBalance": 8490,
+                    "ccPayment": 4751,
+                    "ccUtilisation": 35.974575,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 5
+                },
+                {
+                    "balance": 12244,
+                    "limit": 23600,
+                    "utilisation": 51.881355,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 23600,
+                    "ccSpending": 8871,
+                    "ccBalance": 12610,
+                    "ccPayment": 4318,
+                    "ccUtilisation": 53.432205,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 6
+                },
+                {
+                    "balance": 13395,
+                    "limit": 26800,
+                    "utilisation": 49.981342,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "BARCLAYCARD CENTRE (I)",
+                            "text": "You changed the limit on your <strong>BARCLAYCARD CENTRE (I)</strong> account",
+                            "contextKey": "ACCOUNT_Barclaycard4929277062721000"
+                        }
+                    ],
+                    "ccLimit": 26800,
+                    "ccSpending": 3952,
+                    "ccBalance": 12244,
+                    "ccPayment": 4218,
+                    "ccUtilisation": 45.686565,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 7
+                },
+                {
+                    "balance": 15083,
+                    "limit": 26800,
+                    "utilisation": 56.27985,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 5269,
+                    "ccBalance": 13295,
+                    "ccPayment": 4598,
+                    "ccUtilisation": 49.608208,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 8
+                },
+                {
+                    "balance": 15147,
+                    "limit": 26800,
+                    "utilisation": 56.518658,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 6386,
+                    "ccBalance": 15083,
+                    "ccPayment": 6114,
+                    "ccUtilisation": 56.27985,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 9
+                },
+                {
+                    "balance": 9966,
+                    "limit": 26800,
+                    "utilisation": 37.186565,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 6178,
+                    "ccBalance": 15147,
+                    "ccPayment": 10139,
+                    "ccUtilisation": 56.518658,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 10
+                },
+                {
+                    "balance": 10412,
+                    "limit": 26800,
+                    "utilisation": 38.850746,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 4958,
+                    "ccBalance": 9966,
+                    "ccPayment": 4821,
+                    "ccUtilisation": 37.186565,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 11
+                },
+                {
+                    "balance": 12699,
+                    "limit": 26800,
+                    "utilisation": 47.384327,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "BT CONSUMER (I)",
+                            "text": "You closed your <strong>BT CONSUMER (I)</strong> account",
+                            "contextKey": "ACCOUNT_BT0205780129"
+                        }
+                    ],
+                    "ccLimit": 26800,
+                    "ccSpending": 5267,
+                    "ccBalance": 10412,
+                    "ccPayment": 5513,
+                    "ccUtilisation": 38.850746,
+                    "type": "shortTerm",
+                    "year": 2015,
+                    "month": 12
+                },
+                {
+                    "balance": 10010,
+                    "limit": 26800,
+                    "utilisation": 37.350746,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "THAMES WATER UTILITIES LTD (I)",
+                            "text": "You made a late payment on your <strong>THAMES WATER UTILITIES LTD (I)</strong> account",
+                            "contextKey": "ACCOUNT_THAMESWATERUTILITIESLTD549484906700000000"
+                        }
+                    ],
+                    "ccLimit": 26800,
+                    "ccSpending": 7800,
+                    "ccBalance": 12699,
+                    "ccPayment": 14422,
+                    "ccUtilisation": 47.384327,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 1
+                },
+                {
+                    "balance": 10200,
+                    "limit": 26800,
+                    "utilisation": 38.0597,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 9914,
+                    "ccBalance": 9914,
+                    "ccPayment": 3527,
+                    "ccUtilisation": 36.99254,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 2
+                },
+                {
+                    "balance": 9913,
+                    "limit": 26800,
+                    "utilisation": 36.988808,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 3813,
+                    "ccBalance": 10200,
+                    "ccPayment": 3083,
+                    "ccUtilisation": 38.0597,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 3
+                },
+                {
+                    "balance": 10253,
+                    "limit": 26800,
+                    "utilisation": 38.25746,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You made a late payment on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        }
+                    ],
+                    "ccLimit": 26800,
+                    "ccSpending": 2796,
+                    "ccBalance": 9913,
+                    "ccPayment": 2665,
+                    "ccUtilisation": 36.988808,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 4
+                },
+                {
+                    "balance": 9024,
+                    "limit": 26800,
+                    "utilisation": 33.671642,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 3005,
+                    "ccBalance": 10253,
+                    "ccPayment": 3670,
+                    "ccUtilisation": 38.25746,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 5
+                },
+                {
+                    "balance": 12280,
+                    "limit": 26800,
+                    "utilisation": 45.820896,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "ccLimit": 26800,
+                    "ccSpending": 2441,
+                    "ccBalance": 9024,
+                    "ccPayment": 1834,
+                    "ccUtilisation": 33.671642,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 6
+                },
+                {
+                    "balance": 13172,
+                    "limit": 30600,
+                    "utilisation": 43.045753,
+                    "cashAdvancesNum": 0,
+                    "cashAdvancesTotal": 0,
+                    "events": [
+                        {
+                            "type": "CHANGED_LIMIT_ON_ACCOUNT",
+                            "name": "AMEX GROUP - (I)",
+                            "text": "You changed the limit on your <strong>AMEX GROUP - (I)</strong> account",
+                            "contextKey": "ACCOUNT_AmericanExpress3760 149329 1"
+                        }
+                    ],
+                    "ccLimit": 30600,
+                    "ccSpending": 5090,
+                    "ccBalance": 12280,
+                    "ccPayment": 2103,
+                    "ccUtilisation": 40.13072,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 7
+                },
+                {
+                    "balance": 10269,
+                    "limit": 30600,
+                    "utilisation": 33.558823,
+                    "cashAdvancesNum": 2,
+                    "cashAdvancesTotal": 140,
+                    "ccLimit": 30600,
+                    "ccSpending": 2995,
+                    "ccBalance": 13172,
+                    "ccPayment": 6200,
+                    "ccUtilisation": 43.045753,
+                    "type": "shortTerm",
+                    "year": 2016,
+                    "month": 8
+                }
+            ]
+        },
+        {
+            "name": "longTerm",
+            "values": [
+                {
+                    "balance": 8749,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 3
+                },
+                {
+                    "balance": 8546,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 4
+                },
+                {
+                    "balance": 8342,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 5
+                },
+                {
+                    "balance": 8139,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 6
+                },
+                {
+                    "balance": 7935,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 7
+                },
+                {
+                    "balance": 7732,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 8
+                },
+                {
+                    "balance": 7528,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 9
+                },
+                {
+                    "balance": 7325,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 10
+                },
+                {
+                    "balance": 7121,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 11
+                },
+                {
+                    "balance": 6918,
+                    "type": "longTerm",
+                    "year": 2007,
+                    "month": 12
+                },
+                {
+                    "balance": 6715,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 1
+                },
+                {
+                    "balance": 6511,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 2
+                },
+                {
+                    "balance": 6308,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 3
+                },
+                {
+                    "balance": 6308,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 4
+                },
+                {
+                    "balance": 5901,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 5
+                },
+                {
+                    "balance": 5901,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 6
+                },
+                {
+                    "balance": 5494,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 7
+                },
+                {
+                    "balance": 5290,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 8
+                },
+                {
+                    "balance": 5087,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 9
+                },
+                {
+                    "balance": 4883,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 10
+                },
+                {
+                    "balance": 4680,
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 11
+                },
+                {
+                    "balance": 4680,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2008,
+                    "month": 12
+                },
+                {
+                    "balance": 4476,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 1
+                },
+                {
+                    "balance": 4273,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 2
+                },
+                {
+                    "balance": 4069,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 3
+                },
+                {
+                    "balance": 3866,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 4
+                },
+                {
+                    "balance": 3866,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 5
+                },
+                {
+                    "balance": 3662,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 6
+                },
+                {
+                    "balance": 3459,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 7
+                },
+                {
+                    "balance": 3255,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 8
+                },
+                {
+                    "balance": 3052,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 9
+                },
+                {
+                    "balance": 2645,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 10
+                },
+                {
+                    "balance": 2238,
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 11
+                },
+                {
+                    "balance": 2238,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2009,
+                    "month": 12
+                },
+                {
+                    "balance": 2238,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 1
+                },
+                {
+                    "balance": 2034,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 2
+                },
+                {
+                    "balance": 1831,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 3
+                },
+                {
+                    "balance": 1220,
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 4
+                },
+                {
+                    "balance": 1017,
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 5
+                },
+                {
+                    "balance": 813,
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 6
+                },
+                {
+                    "balance": 610,
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 7
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 8
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 9
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 10
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 11
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2010,
+                    "month": 12
+                },
+                {
+                    "balance": 610,
+                    "events": [
+                        {
+                            "type": "LATE_PAYMENT_ON_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You made a late payment on your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2011,
+                    "month": 1
+                },
+                {
+                    "balance": 0,
+                    "events": [
+                        {
+                            "type": "CLOSED_ACCOUNT",
+                            "name": "NATWEST PERSONAL LOANS (I)",
+                            "text": "You closed your <strong>NATWEST PERSONAL LOANS (I)</strong> account",
+                            "contextKey": "ACCOUNT_Natwest504040043582280611"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2011,
+                    "month": 2
+                },
+                {
+                    "balance": 27625,
+                    "events": [
+                        {
+                            "type": "OPENED_ACCOUNT",
+                            "name": "LAND ROVER UWRITE BY BLACK HORSE",
+                            "text": "You opened a <strong>LAND ROVER UWRITE BY BLACK HORSE</strong> account",
+                            "contextKey": "ACCOUNT_BlackHorse13/04/578933747"
+                        }
+                    ],
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 1
+                },
+                {
+                    "balance": 27298,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 2
+                },
+                {
+                    "balance": 26971,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 3
+                },
+                {
+                    "balance": 26644,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 4
+                },
+                {
+                    "balance": 26317,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 5
+                },
+                {
+                    "balance": 25990,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 6
+                },
+                {
+                    "balance": 25663,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 7
+                },
+                {
+                    "balance": 25336,
+                    "type": "longTerm",
+                    "year": 2016,
+                    "month": 8
+                }
+            ]
+        }
+    ]
+}

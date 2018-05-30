@@ -6,27 +6,34 @@ import Chart, { Marker } from './Chart/';
 
 import styles from './App.css';
 
-const testData = [
-  50,
-  140,
-  150,
-  140,
-  145,
-  135,
-  125,
-  88,
-  60,
-  120,
-  112,
-  100,
-  120,
-  118,
-  116,
-  116,
-  82,
-  10,
-  190,
-  180
+import data from '../data/test.json';
+
+let testData = data.data[0].values.map((score) => {
+  return score.score
+})
+
+let series = [
+  {
+    name: "Credit Score",
+    data: data.data[0].values,
+    filter: (value) => {
+      return value.score
+    }
+  },
+  {
+    name: "Short Term Debt",
+    data: data.data[1].values,
+    filter: (value) => {
+      return value.balance
+    }
+  },
+  {
+    name: "Long Term Debt",
+    data: data.data[2].values,
+    filter: (value) => {
+      return value.balance
+    }
+  }
 ]
 
 const App = () => {
@@ -34,8 +41,10 @@ const App = () => {
     <div className={styles.container}>
 		  <Chart
         data={testData}
+        series={series}
         centered
         marker
+        margin={100}
       />
     </div>
 	)

@@ -11,25 +11,24 @@ import styles from './styles.css';
 import Func from '../src/functions';
 import Type from '../src/lineTypes';
 
-let defaultData = [0, 20, 50, 25, 75, 60, 100]
-
 class Chart extends Component {
   constructor(props) {
     super(props)
 
-    // Setup if data is passed into component
-    let data = this.props.data ? this.props.data : defaultData;
-
     // Set state
     this.state = {
-      data: data,
-      smallest: Func.getSmallest(data),
-      largest: Func.getLargest(data),
+      data: this.props.data,
+      smallest: Func.getSmallest(this.props.data),
+      largest: Func.getLargest(this.props.data),
       xWidth: this.props.xWidth,
       color: "#b356fa"
     }
 
-    this.touch = false
+    this.defaultLine = {
+      data: this.props.data,
+      xWidth: this.props.xWidth,
+      margin: this.props.margin
+    }
 
     // Bind functions
     this.createSnapComponent = this.createSnapComponent.bind(this)
@@ -42,24 +41,28 @@ class Chart extends Component {
 
   // Setup snap component and canvas height
   componentDidMount() {
+    // Setup snap instance and svg width
     this.createSnapComponent()
+    // Get the height of the canvas
     this.getHeight()
 
+    // Create a marker instance if called on graph
     if (this.props.marker) {
       this.helper = new Helper
       this.markerHelper = this.helper.build(this.snap, this.canvasNode.offsetHeight)
     }
 
+    // Switch to years if canvas is clicked
     this.canvasNode.addEventListener("click", this.switchToYears)
 
   }
 
-  // Plot the data after the component has mounted
+  // Plot the data after the component has mounted & updated its state with snap and height
   componentDidUpdate(prevProps, prevState) {
     if (this.state.canvasHeight !== prevState.canvasHeight) {
       this.plotData()
     }
-
+    // Initiate the position of the marker
     this.canvas.getScrollPosition()
   }
 
@@ -87,25 +90,18 @@ class Chart extends Component {
 
   }
 
+  // Change the width of a month to see more of the graph (i.e. years)
   switchToYears() {
 
     this.years = this.years !== undefined ? !this.years : true
 
+    // Change the xWidth to be the default or 1/6 of default
     let xWidth = this.years ? this.props.xWidth / 6 : this.props.xWidth
 
-    let newCurve = Type.strictCurve(
-      this.state.data,
-      this.state.smallest,
-      this.state.largest,
-      this.state.canvasHeight,
-      xWidth,
-      this.props.margin
-    )
+    // Update the current line with the new xWidth
+    this.currentLine.updatePath({xWidth: xWidth})
 
-    this.currentLine.attr({
-      d: newCurve
-    })
-
+    // Update the scroll position of the canvas relatively
     let currentWidth = this.state.xWidth * (this.state.data.length - 1)
     let newWidth = xWidth * (this.state.data.length - 1)
     let newScroll = Func.modulate(this.canvasNode.scrollLeft, [0, currentWidth], [0, newWidth])
@@ -128,13 +124,14 @@ class Chart extends Component {
       canvasHeight: this.state.canvasHeight,
       xWidth: this.props.xWidth,
       margin: this.props.margin,
-      snap: this.snap
+      snap: this.snap,
+      color: this.state.color
     })
-
-    this.currentLine = curve.line
+    this.currentLine = curve
 
   }
 
+  // Update the vertical helper to the current scroll / hover position
   updateHelper(posX, scroll) {
 
     this.markerHelper.update(posX)
@@ -142,28 +139,36 @@ class Chart extends Component {
 
   }
 
+  // Update the marker on the current line to position of the helper
+  // Intersects with the current line
   updateMarker(posX, scroll) {
 
-    let intersection = this.markerHelper.getIntersection(Snap, this.currentLine)
+    // Get the intersection point with the current line
+    let intersection = this.markerHelper.getIntersection(Snap, this.currentLine.line)
     let posY = intersection ? intersection.y : null
+    // Get the left position of the marker
     let posLeft = posX - scroll
     posLeft += this.props.centered ? window.innerWidth / 2 : 0
 
+    // Change the left position of the marker if bounds are beyond the line
     if (posX < 0) {
       posLeft -= posX
     } else if (posX > this.svg.width.baseVal.value) {
       posLeft -= posX - this.svg.width.baseVal.value
     }
 
+    // Getting the nearest value to the marker
     let nearest = Func.roundToNearest(posX, this.state.xWidth)
     let index = nearest / this.state.xWidth
     let val = this.state.data[index]
 
+    // Call the marker to update its position
     this.marker.updatePosition({
       top: posY,
       left: posLeft
     })
 
+    // If there is a value update, update the value of the marker label
     if (val) {
       this.marker.updateValue(val)
     }

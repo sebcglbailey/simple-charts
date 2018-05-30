@@ -15,7 +15,8 @@ class Line {
       canvasHeight: props.canvasHeight,
       xWidth: props.xWidth,
       margin: props.margin,
-      snap: props.snap
+      snap: props.snap,
+      color: props.color
     }
 
     this.plotData()
@@ -38,9 +39,26 @@ class Line {
     if (this.state.snap) { 
       this.line.attr({
         fill: "none",
-        stroke: "#00f"
+        stroke: this.state.color
       })
     }
+
+  }
+
+  updatePath(options) {
+
+    let newCurve = Type.strictCurve(
+      this.state.data,
+      this.state.smallest,
+      this.state.largest,
+      this.state.canvasHeight,
+      options.xWidth,
+      this.state.margin
+    )
+
+    this.line.attr({
+      d: newCurve
+    })
 
   }
 
