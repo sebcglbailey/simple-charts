@@ -15,26 +15,34 @@ let testData = data.data[0].values.map((score) => {
 let series = [
   {
     name: "Credit Score",
+    default: true,
     data: data.data[0].values,
     filter: (value) => {
       return value.score
-    }
+    },
+    min: 0,
+    max: 700,
+    color: "#aae1ea"
   },
   {
     name: "Short Term Debt",
     data: data.data[1].values,
     filter: (value) => {
       return value.balance
-    }
+    },
+    color: "#f3ba8b"
   },
   {
     name: "Long Term Debt",
     data: data.data[2].values,
     filter: (value) => {
       return value.balance
-    }
+    },
+    color: "#f3cddd"
   }
 ]
+
+let length = (data.index.maxYear - data.index.minYear) * 12 + data.index.maxMonth - data.index.minMonth
 
 const App = () => {
 	return(
@@ -42,6 +50,7 @@ const App = () => {
 		  <Chart
         data={testData}
         series={series}
+        length={length}
         centered
         marker
         margin={100}

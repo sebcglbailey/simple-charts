@@ -15,9 +15,29 @@ class Chart extends Component {
   constructor(props) {
     super(props)
 
+    let smallestArr = [], largestArr = [], seriesLength = [];
+
+    this.props.series.forEach((series) => {
+
+      let dataArray = series.data.map((obj) => {
+        return series.filter(obj)
+      })
+
+      let seriesSmall = Func.getSmallest(dataArray)
+      let seriesBig = Func.getLargest(dataArray)
+      smallestArr.push({name: series.name, value: typeof(series.min) == "number" ? series.min : seriesSmall})
+      largestArr.push({name: series.name, value: typeof(series.max) == "number" ? series.max : seriesBig})
+
+      seriesLength.push(series.data.length)
+
+    })
+
+    let length = this.props.length ? this.props.length : Func.getSmallest(seriesLength);
+
     // Set state
     this.state = {
       data: this.props.data,
+      length: length,
       smallest: Func.getSmallest(this.props.data),
       largest: Func.getLargest(this.props.data),
       xWidth: this.props.xWidth,
@@ -53,7 +73,7 @@ class Chart extends Component {
     }
 
     // Switch to years if canvas is clicked
-    this.canvasNode.addEventListener("click", this.switchToYears)
+    // this.canvasNode.addEventListener("click", this.switchToYears)
 
   }
 
@@ -85,7 +105,7 @@ class Chart extends Component {
     this.snap = snap
     this.setState({
       snap: snap,
-      svgWidth: this.props.xWidth * (this.state.data.length - 1)
+      svgWidth: this.props.xWidth * (this.state.length)
     })
 
   }
@@ -103,12 +123,12 @@ class Chart extends Component {
 
     // Update the scroll position of the canvas relatively
     let currentWidth = this.state.xWidth * (this.state.data.length - 1)
-    let newWidth = xWidth * (this.state.data.length - 1)
+    let newWidth = xWidth * (this.state.length)
     let newScroll = Func.modulate(this.canvasNode.scrollLeft, [0, currentWidth], [0, newWidth])
 
     this.setState({
       xWidth: xWidth,
-      svgWidth: xWidth * (this.state.data.length - 1),
+      svgWidth: xWidth * (this.state.length),
       canvasScroll: newScroll
     })
 
@@ -117,17 +137,47 @@ class Chart extends Component {
   // Plot the data on the canvas
   plotData() {
 
-    let curve = new Line({
-      data: this.state.data,
-      smallest: this.state.smallest,
-      largest: this.state.largest,
-      canvasHeight: this.state.canvasHeight,
-      xWidth: this.props.xWidth,
-      margin: this.props.margin,
-      snap: this.snap,
-      color: this.state.color
+    let lines = []
+
+    this.props.series.forEach((series) => {
+
+      let dataArray = series.data.map((obj) => {
+        return series.filter(obj)
+      })
+
+      let seriesSmall = Func.getSmallest(dataArray)
+      let seriesBig = Func.getLargest(dataArray)
+      seriesSmall = typeof(series.min) == "number" ? series.min : seriesSmall;
+      seriesBig = typeof(series.max) == "number" ? series.max : seriesBig;
+
+      let curve = new Line({
+        data: dataArray,
+        smallest: seriesSmall,
+        largest: seriesBig,
+        canvasHeight: this.state.canvasHeight,
+        xWidth: this.props.xWidth,
+        margin: this.props.margin,
+        snap: this.snap,
+        color: series.color
+      })
+
+      lines.push(curve)
+
     })
-    this.currentLine = curve
+
+    this.currentLine = lines[0]
+
+    // let curve = new Line({
+    //   data: this.state.data,
+    //   smallest: this.state.smallest,
+    //   largest: this.state.largest,
+    //   canvasHeight: this.state.canvasHeight,
+    //   xWidth: this.props.xWidth,
+    //   margin: this.props.margin,
+    //   snap: this.snap,
+    //   color: this.state.color
+    // })
+    // this.currentLine = curve
 
   }
 
@@ -146,9 +196,14 @@ class Chart extends Component {
     // Get the intersection point with the current line
     let intersection = this.markerHelper.getIntersection(Snap, this.currentLine.line)
     let posY = intersection ? intersection.y : null
+    
     // Get the left position of the marker
-    let posLeft = posX - scroll
-    posLeft += this.props.centered ? window.innerWidth / 2 : 0
+    let posLeft = null;
+    if (intersection) {
+      posLeft = posX - scroll
+      posLeft += this.props.centered ? window.innerWidth / 2 : 0
+    }
+
 
     // Change the left position of the marker if bounds are beyond the line
     if (posX < 0) {
@@ -164,8 +219,11 @@ class Chart extends Component {
 
     // Call the marker to update its position
     this.marker.updatePosition({
-      top: posY,
-      left: posLeft
+      position: {
+        top: posY,
+        left: posLeft
+      },
+      scroll: scroll
     })
 
     // If there is a value update, update the value of the marker label

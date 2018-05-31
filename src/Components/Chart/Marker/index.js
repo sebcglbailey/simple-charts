@@ -29,25 +29,25 @@ class Marker extends Component {
     })
   }
 
-  updatePosition(position) {
+  updatePosition(options) {
 
-    if (position.top) {
-      this.setState({
-        style: {
-          backgroundColor: this.props.color,
-          top: position.top,
-          left: position.left
-        }
-      })
-    } else {
-      this.setState({
-        style: {
-          backgroundColor: this.props.color,
-          top: this.state.style.top,
-          left: position.left
-        }
-      })
-    }
+    let position = options.position
+    let scroll = options.scroll
+
+    this.lastScrollLeft = position.left ? scroll : this.lastScrollLeft ? this.lastScrollLeft : null
+    this.lastLeft = position.left ? position.left : this.lastLeft ? this.lastLeft : null
+    let currentScroll = !position.left? scroll : null
+
+    let top = position.top ? position.top : this.state.style.top
+    let left = position.left ? position.left : currentScroll ? this.lastLeft - (currentScroll - this.lastScrollLeft) : this.state.style.left
+
+    this.setState({
+      style: {
+        backgroundColor: this.props.color,
+        top: top,
+        left: left
+      }
+    })
 
   }
 

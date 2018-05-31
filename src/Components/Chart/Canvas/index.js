@@ -19,13 +19,14 @@ class Canvas extends Component {
 
     // Listen to the Canvas scrolling, and update the scroll position
     this.elem.addEventListener("scroll", this.getScrollPosition)
-    // Listen to the mouse moving over the canvas, and get the hover position
-    this.elem.addEventListener("mousemove", this.getHoverPosition)
+    
+    // // Listen to the mouse moving over the canvas, and get the hover position
+    // this.elem.addEventListener("mousemove", this.getHoverPosition)
 
-    // Listen to a touch event on the device, and remove the mouse move event if it happens
-    window.addEventListener("touch", () => {
-      this.elem.removeEventListener("mousemove", this.getHoverPosition)
-    })
+    // // Listen to a touch event on the device, and remove the mouse move event if it happens
+    // window.addEventListener("touch", () => {
+    //   this.elem.removeEventListener("mousemove", this.getHoverPosition)
+    // })
 
   }
 
