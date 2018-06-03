@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Chart, { Marker } from './Chart/';
 
+import addEmptyData from './Chart/src/addEmptyData';
+
 import styles from './App.css';
 
 import data from '../data/test.json';
@@ -42,7 +44,11 @@ let series = [
   }
 ]
 
-let length = (data.index.maxYear - data.index.minYear) * 12 + data.index.maxMonth - data.index.minMonth
+series.forEach((series) => {
+  addEmptyData(series, data.index)
+})
+
+let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth)
 
 const App = () => {
 	return(
@@ -54,6 +60,7 @@ const App = () => {
         centered
         marker
         margin={100}
+        xAxisMarkers
       />
     </div>
 	)

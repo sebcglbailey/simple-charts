@@ -6,6 +6,8 @@ const Plot = {
 
   straight: (data, min, max, height, xWidth, margin) => {
 
+    let started = false;
+
     let string = data.map((value, index) => {
 
       value = Func.convert(value, min, max, height)
@@ -14,10 +16,17 @@ const Plot = {
         value += margin
       }
 
-      if (index == 0) {
+      if (value && value !== NaN && !started) {
+
+        started = true
         return `M0,${value} L`
-      } else {
+
+      } else if (value && value !== NaN) {
+
         return `${xWidth * index},${value} `
+
+      } else {
+        return
       }
 
     })
@@ -29,6 +38,8 @@ const Plot = {
 
   simpleCurve: (data, min, max, height, xWidth, margin) => {
     
+    let started = false;
+
     let string = data.map((value, index) => {
 
       let prevVal = index > 0 ? data[index-1] : undefined
@@ -43,13 +54,20 @@ const Plot = {
 
       let diff, prevHandle;
 
-      if (index == 0) {
+      if (value && value !== NaN && !started) {
+
+        started = true;
         return `M0,${value} S`
-      } else {
+
+      } else if (value && value !== NaN) {
+
         diff = value - prevVal
         prevHandle = value - (diff/2)
 
         return `${xWidth * index - xWidth/2},${prevHandle} ${xWidth * index},${value} `
+
+      } else {
+        return
       }
 
     })
@@ -62,6 +80,8 @@ const Plot = {
 
   strictCurve: (data, min, max, height, xWidth, margin) => {
 
+    let started = false;
+
     let string = data.map((value, index) => {
 
       let diff;
@@ -69,9 +89,9 @@ const Plot = {
       let nextVal = index < data.length - 1 ? data[index + 1] : undefined;
       let prevVal = index > 0 ? data[index - 1] : undefined;
 
-      value = Func.convert(value, min, max, height);
-      nextVal = index < data.length - 1 ? Func.convert(nextVal, min, max, height) : 0
-      prevVal = index > 0 ? Func.convert(prevVal, min, max, height) : 0
+      value = value !== NaN ? Func.convert(value, min, max, height) : undefined;
+      nextVal = value !== NaN && index < data.length - 1 ? Func.convert(nextVal, min, max, height) : undefined;
+      prevVal = value !== NaN && index > 0 ? Func.convert(prevVal, min, max, height) : undefined;
 
       if (margin) {
         value += margin
@@ -79,12 +99,13 @@ const Plot = {
         prevVal += margin
       }
 
-      if (index == 0) {
-
+      if ((value || value == 0) && !started && value !== NaN) {
+        started = true
+        
         diff = nextVal - value
-        return `M0,${value} C${xWidth/2},${value + diff/2} `
+        return `M${xWidth * index},${value} C${(xWidth * index) + xWidth/2},${value + diff/2} `
 
-      } else if (index < data.length - 1) {
+      } else if (index < data.length - 1 && value && value !== NaN) {
 
         // Getting the handles
         let x1 = index * xWidth - xWidth / 2
@@ -120,11 +141,13 @@ const Plot = {
         // Return the string to add a point with handles in between the end points
         return `${x1},${y1} ${index * xWidth},${value} ${x2},${y2} `
 
-      } else {
+      } else if (value && value !== NaN) {
 
         diff = value - prevVal
         return `${index * xWidth - xWidth/2},${value - diff/2} ${index * xWidth},${value} `
 
+      } else {
+        return
       }
 
     })

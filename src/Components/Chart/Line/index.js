@@ -36,6 +36,7 @@ class Line {
     )
 
     this.line = this.state.snap ? this.state.snap.path(curve) : null
+    
     if (this.state.snap) { 
       this.line.attr({
         fill: "none",

@@ -22,6 +22,7 @@ class Chart extends Component {
       let dataArray = series.data.map((obj) => {
         return series.filter(obj)
       })
+      series.dataArray = dataArray
 
       let seriesSmall = Func.getSmallest(dataArray)
       let seriesBig = Func.getLargest(dataArray)
@@ -32,7 +33,7 @@ class Chart extends Component {
 
     })
 
-    let length = this.props.length ? this.props.length : Func.getSmallest(seriesLength);
+    let length = this.props.length ? this.props.length : Func.getLargest(seriesLength);
 
     // Set state
     this.state = {
@@ -82,6 +83,10 @@ class Chart extends Component {
     if (this.state.canvasHeight !== prevState.canvasHeight) {
       this.plotData()
     }
+
+    // Set the position of the graph to the far right
+    this.canvas.elem.scrollLeft = this.state.length * this.state.xWidth
+
     // Initiate the position of the marker
     this.canvas.getScrollPosition()
   }
@@ -166,18 +171,13 @@ class Chart extends Component {
     })
 
     this.currentLine = lines[0]
+    this.currentSeries = this.props.series[0]
 
-    // let curve = new Line({
-    //   data: this.state.data,
-    //   smallest: this.state.smallest,
-    //   largest: this.state.largest,
-    //   canvasHeight: this.state.canvasHeight,
-    //   xWidth: this.props.xWidth,
-    //   margin: this.props.margin,
-    //   snap: this.snap,
-    //   color: this.state.color
-    // })
-    // this.currentLine = curve
+    this.setState({
+      currentLine: this.currentLine,
+      currentSeries: this.currentSeries,
+      color: this.currentSeries.color
+    })
 
   }
 
@@ -215,7 +215,7 @@ class Chart extends Component {
     // Getting the nearest value to the marker
     let nearest = Func.roundToNearest(posX, this.state.xWidth)
     let index = nearest / this.state.xWidth
-    let val = this.state.data[index]
+    let val = this.currentSeries && this.currentSeries.dataArray ? this.currentSeries.dataArray[index] : null
 
     // Call the marker to update its position
     this.marker.updatePosition({
@@ -256,7 +256,7 @@ class Chart extends Component {
             ref={(elem) => {this.marker = elem}}
             color={this.state.color}
             value={this.state.data ? this.state.data[0] : null}
-            label="Score"
+            label={this.state.currentSeries? this.state.currentSeries.name : null}
           />
         ) : null}
       </Canvas>

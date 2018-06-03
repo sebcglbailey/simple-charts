@@ -28,7 +28,10 @@ const Functions = {
     let smallestValue = array[0]
 
     array.forEach((value) => {
-      if (value < smallestValue) {
+      if (!smallestValue) {
+        smallestValue = value
+      }
+      if (value && value < smallestValue) {
         smallestValue = value
       }
     })
@@ -40,7 +43,10 @@ const Functions = {
     let largestValue = array[0]
 
     array.forEach((value) => {
-      if (value > largestValue) {
+      if (!largestValue) {
+        largestValue = value
+      }
+      if (value && value > largestValue) {
         largestValue = value
       }
     })
