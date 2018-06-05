@@ -20,14 +20,26 @@ class Marker extends Component {
     this.updateValue = this.updateValue.bind(this)
   }
 
-  componentDidMount() {
-    let labelsHeight = this.labels.offsetHeight
-    this.setState({
-      labelStyle: {
-        top: -labelsHeight * 1.4
-      }
-    })
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.label !== this.props.label) {
+      this.setState({ label: nextProps.label })
+    }
+    if (nextProps.value !== this.props.value) {
+      this.setState({ value: nextProps.value })
+    }
   }
+
+  // componentDidUpdate(nextProps, nextState) {
+  //   let labelsHeight = this.labels.offsetHeight
+  //   if ((nextState.labelStyle && nextState.labelStyle.height !== labelsHeight) || !nextState.labelStyle) {
+  //     this.setState({
+  //       labelStyle: {
+  //         top: -labelsHeight * 1.4,
+  //         height: labelsHeight
+  //       }
+  //     })
+  //   }
+  // }
 
   updatePosition(options) {
 
@@ -60,6 +72,8 @@ class Marker extends Component {
   }
 
   render() {
+    let hasValue = this.state.value || typeof(this.state.value == "number")
+
     return (
       <div
         className={styles.marker}
@@ -70,7 +84,7 @@ class Marker extends Component {
           className={styles.labels}
           style={this.state.labelStyle}
         >
-          {this.state.value ? (
+          {hasValue ? (
             <div className={styles.value}>{this.state.value}</div>
           ) : null}
           {this.state.label ? (

@@ -64,8 +64,6 @@ const addEmptyData = (series, info) => {
 
   series.data.splice(newDataIndex, 0, ...newData)
 
-  console.log(series)
-
 }
 
 export default addEmptyData

@@ -19,16 +19,6 @@ class Chart extends Component {
 
     this.props.series.forEach((series) => {
 
-      let dataArray = series.data.map((obj) => {
-        return series.filter(obj)
-      })
-      series.dataArray = dataArray
-
-      let seriesSmall = Func.getSmallest(dataArray)
-      let seriesBig = Func.getLargest(dataArray)
-      smallestArr.push({name: series.name, value: typeof(series.min) == "number" ? series.min : seriesSmall})
-      largestArr.push({name: series.name, value: typeof(series.max) == "number" ? series.max : seriesBig})
-
       seriesLength.push(series.data.length)
 
     })
@@ -37,10 +27,7 @@ class Chart extends Component {
 
     // Set state
     this.state = {
-      data: this.props.data,
       length: length,
-      smallest: Func.getSmallest(this.props.data),
-      largest: Func.getLargest(this.props.data),
       xWidth: this.props.xWidth,
       color: "#b356fa"
     }
@@ -57,7 +44,9 @@ class Chart extends Component {
     this.getHeight = this.getHeight.bind(this)
     this.switchToYears = this.switchToYears.bind(this)
     this.updateHelper = this.updateHelper.bind(this)
+    this.updateHelperOnClick = this.updateHelperOnClick.bind(this)
     this.updateMarker = this.updateMarker.bind(this)
+    this.findNearestLine = this.findNearestLine.bind(this)
   }
 
   // Setup snap component and canvas height
@@ -84,8 +73,11 @@ class Chart extends Component {
       this.plotData()
     }
 
-    // Set the position of the graph to the far right
-    this.canvas.elem.scrollLeft = this.state.length * this.state.xWidth
+    if (!this.state.mounted) {
+      // Set the position of the graph to the far right
+      this.canvas.elem.scrollLeft = this.state.length * this.state.xWidth
+      this.setState({ mounted: true })
+    }
 
     // Initiate the position of the marker
     this.canvas.getScrollPosition()
@@ -127,7 +119,7 @@ class Chart extends Component {
     this.currentLine.updatePath({xWidth: xWidth})
 
     // Update the scroll position of the canvas relatively
-    let currentWidth = this.state.xWidth * (this.state.data.length - 1)
+    let currentWidth = this.state.xWidth * (this.currentSeries.data.length - 1)
     let newWidth = xWidth * (this.state.length)
     let newScroll = Func.modulate(this.canvasNode.scrollLeft, [0, currentWidth], [0, newWidth])
 
@@ -142,7 +134,9 @@ class Chart extends Component {
   // Plot the data on the canvas
   plotData() {
 
-    let lines = []
+    this.lines = []
+
+    this.visibleLines = []
 
     this.props.series.forEach((series) => {
 
@@ -155,7 +149,7 @@ class Chart extends Component {
       seriesSmall = typeof(series.min) == "number" ? series.min : seriesSmall;
       seriesBig = typeof(series.max) == "number" ? series.max : seriesBig;
 
-      let curve = new Line({
+      let line = new Line({
         data: dataArray,
         smallest: seriesSmall,
         largest: seriesBig,
@@ -166,12 +160,16 @@ class Chart extends Component {
         color: series.color
       })
 
-      lines.push(curve)
+      this.lines.push(line)
+
+      if (series.default) {
+        this.currentLine = line
+        this.currentSeries = series
+      }
+
+      this.visibleLines.push(line)
 
     })
-
-    this.currentLine = lines[0]
-    this.currentSeries = this.props.series[0]
 
     this.setState({
       currentLine: this.currentLine,
@@ -186,6 +184,48 @@ class Chart extends Component {
 
     this.markerHelper.update(posX)
     this.updateMarker(posX, scroll)
+
+  }
+
+  // Update the vertical helper to the current click position
+  updateHelperOnClick(posX, posY) {
+
+    this.markerHelper.updateClick(posX)
+    this.findNearestLine(posX, posY)
+
+  }
+
+  findNearestLine(posX, posY) {
+
+    let intersections = this.markerHelper.getAllIntersections(Snap, this.visibleLines, posX)
+
+    let closestIndex;
+    let difference;
+
+    intersections.forEach((intersection, index) => {
+
+      if (!difference && intersection) {
+        difference = Math.abs(posY - intersection.y)
+        closestIndex = index
+      }
+
+      if (intersection && Math.abs(posY - intersection.y) < difference) {
+        closestIndex = index
+        difference = Math.abs(posY - intersection.y)
+      }
+
+    })
+
+    this.currentLine = this.visibleLines[closestIndex]
+    this.currentSeries = this.props.series[closestIndex]
+    this.updateMarker(posX)
+    this.setState({
+      color: this.currentSeries.color,
+      currentSeries: this.currentSeries,
+      currentLine: this.currentLine
+    })
+
+    Func.scrollTo(this.canvas.elem, posX, 350)
 
   }
 
@@ -227,7 +267,7 @@ class Chart extends Component {
     })
 
     // If there is a value update, update the value of the marker label
-    if (val) {
+    if (typeof(val) == "number" && val !== NaN) {
       this.marker.updateValue(val)
     }
 
@@ -244,6 +284,7 @@ class Chart extends Component {
         }}
         centered={this.props.centered}
         updateHelper={this.updateHelper}
+        updateHelperOnClick={this.updateHelperOnClick}
         scrollLeft={this.state.canvasScroll}
       >
         <SVG
@@ -255,8 +296,8 @@ class Chart extends Component {
           <Marker
             ref={(elem) => {this.marker = elem}}
             color={this.state.color}
-            value={this.state.data ? this.state.data[0] : null}
-            label={this.state.currentSeries? this.state.currentSeries.name : null}
+            value={this.state.currentSeries && this.state.currentSeries.dataArray ? this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] : null}
+            label={this.state.currentSeries ? this.state.currentSeries.name : null}
           />
         ) : null}
       </Canvas>

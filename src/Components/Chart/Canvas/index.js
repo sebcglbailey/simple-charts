@@ -12,6 +12,7 @@ class Canvas extends Component {
 
     this.getScrollPosition = this.getScrollPosition.bind(this)
     this.getHoverPosition = this.getHoverPosition.bind(this)
+    this.getClickPosition = this.getClickPosition.bind(this)
 
   }
 
@@ -27,6 +28,8 @@ class Canvas extends Component {
     // window.addEventListener("touch", () => {
     //   this.elem.removeEventListener("mousemove", this.getHoverPosition)
     // })
+
+    this.elem.addEventListener("click", this.getClickPosition)
 
   }
 
@@ -46,7 +49,7 @@ class Canvas extends Component {
     // If there is a mouse x position set,
     // offset the helperX position by the mouse position difference 
     // to the center (if centered), if not, just the mouse position
-    helperX += this.mouseX ? this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) : 0
+    // helperX += this.mouseX ? this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) : 0
 
     // If the function is set, run the update helper position function
     if (this.props.updateHelper) {
@@ -58,6 +61,7 @@ class Canvas extends Component {
   getHoverPosition(event) {
     // Set the current mouse position
     this.mouseX = event.clientX
+    this.mouseY = event.clientY
     
     // Set the hlper x position to the mouse position
     // offset by the center of the screen if graph is centered
@@ -66,6 +70,19 @@ class Canvas extends Component {
     // If the function is set, run the update helper position function
     if (this.props.updateHelper) {
       this.props.updateHelper(helperX, this.elem.scrollLeft)
+    }
+
+  }
+
+  getClickPosition(event) {
+
+    this.mouseX = event.clientX
+    this.mouseY = event.clientY
+
+    let helperX = this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) + this.elem.scrollLeft
+
+    if (this.props.updateHelperOnClick) {
+      this.props.updateHelperOnClick(helperX, this.mouseY)
     }
 
   }
