@@ -45,7 +45,7 @@ class Line {
       this.state.margin
     )
 
-    this.line = this.state.snap ? this.state.snap.path(this.start) : null
+    this.line = this.state.snap ? this.state.snap.path(this.curve) : null
     
     if (this.state.snap) { 
       this.line.attr({
@@ -55,15 +55,11 @@ class Line {
 
       if (this.state.parent) {
         this.line.attr({
-          opacity: 0
+          opacity: 0,
+          d: this.start
         })
       }
 
-      if (!this.state.parent) {
-        this.line.animate({
-          d: this.curve
-        }, 300, mina.easinout)
-      }
     }
 
   }
