@@ -25,7 +25,8 @@ let series = [
     },
     min: 0,
     max: 700,
-    color: "#aae1ea"
+    color: "#aae1ea",
+    children: ["Short Term Debt", "Long Term Debt"]
   },
   {
     name: "Short Term Debt",
@@ -33,7 +34,8 @@ let series = [
     filter: (value) => {
       return value.balance
     },
-    color: "#f3ba8b"
+    color: "#f3ba8b",
+    children: ["Credit Score", "Spending", "Payments", "Credit Limit"]
   },
   {
     name: "Spending",
@@ -42,7 +44,8 @@ let series = [
       return value.ccSpending
     },
     color: "#c77d7d",
-    parent: "Short Term Debt"
+    parent: "Short Term Debt",
+    children: ["Short Term Debt", "Payments", "Credit Limit"]
   },
   {
     name: "Payments",
@@ -51,7 +54,8 @@ let series = [
       return value.ccPayment
     },
     color: "#f7df71",
-    parent: "Short Term Debt"
+    parent: "Short Term Debt",
+    children: ["Short Term Debt", "Spending", "Credit Limit"]
   },
   {
     name: "Credit Limit",
@@ -60,7 +64,8 @@ let series = [
       return value.ccLimit
     },
     color: "#73b141",
-    parent: "Short Term Debt"
+    parent: "Short Term Debt",
+    children: ["Short Term Debt", "Payments", "Spending"]
   },
   {
     name: "Long Term Debt",
@@ -68,7 +73,8 @@ let series = [
     filter: (value) => {
       return value.balance
     },
-    color: "#f3cddd"
+    color: "#f3cddd",
+    children: ["Credit Score", "Short Term Debt"]
   }
 ]
 

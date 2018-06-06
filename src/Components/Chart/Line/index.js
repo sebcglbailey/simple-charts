@@ -9,6 +9,7 @@ class Line {
   constructor(props) {
 
     this.state = {
+      name: props.name,
       data: props.data,
       smallest: props.smallest,
       largest: props.largest,
@@ -16,7 +17,9 @@ class Line {
       xWidth: props.xWidth,
       margin: props.margin,
       snap: props.snap,
-      color: props.color
+      color: props.color,
+      parent: props.parent,
+      children: props.children
     }
 
     this.plotData()
@@ -42,6 +45,12 @@ class Line {
         fill: "none",
         stroke: this.state.color
       })
+
+      if (this.state.parent) {
+        this.line.attr({
+          opacity: 0
+        })
+      }
     }
 
   }
@@ -60,6 +69,22 @@ class Line {
     this.line.attr({
       d: newCurve
     })
+
+  }
+
+  show(duration) {
+
+    this.line.animate({
+      opacity: 1
+    }, duration, mina.easeinout)
+
+  }
+
+  hide(duration) {
+
+    this.line.animate({
+      opacity: 0
+    }, duration, mina.easeinout)
 
   }
 

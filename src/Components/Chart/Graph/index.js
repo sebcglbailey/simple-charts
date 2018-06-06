@@ -137,27 +137,22 @@ class Chart extends Component {
     this.lines = []
 
     this.visibleLines = []
+    this.visibleSeries = []
 
     this.props.series.forEach((series) => {
 
-      let dataArray = series.data.map((obj) => {
-        return series.filter(obj)
-      })
-
-      let seriesSmall = Func.getSmallest(dataArray)
-      let seriesBig = Func.getLargest(dataArray)
-      seriesSmall = typeof(series.min) == "number" ? series.min : seriesSmall;
-      seriesBig = typeof(series.max) == "number" ? series.max : seriesBig;
-
       let line = new Line({
-        data: dataArray,
-        smallest: seriesSmall,
-        largest: seriesBig,
+        name: series.name,
+        data: series.dataArray,
+        smallest: series.min,
+        largest: series.max,
         canvasHeight: this.state.canvasHeight,
         xWidth: this.props.xWidth,
         margin: this.props.margin,
         snap: this.snap,
-        color: series.color
+        color: series.color,
+        parent: series.parent,
+        children: series.children
       })
 
       this.lines.push(line)
@@ -167,7 +162,10 @@ class Chart extends Component {
         this.currentSeries = series
       }
 
-      this.visibleLines.push(line)
+      if (!series.parent) {
+        this.visibleLines.push(line)
+        this.visibleSeries.push(series)
+      }
 
     })
 
@@ -193,6 +191,27 @@ class Chart extends Component {
     this.markerHelper.updateClick(posX)
     this.findNearestLine(posX, posY)
 
+    let visibleLines = []
+    let visibleSeries = []
+
+    this.lines.map((line, index) => {
+      let lineName = line.state.name
+
+      if (line == this.currentLine) {
+        visibleLines.push(line)
+        visibleSeries.push(this.props.series[index])
+      } else if (this.currentLine.state.children && this.currentLine.state.children.includes(lineName)) {
+        line.show(500)
+        visibleLines.push(line)
+        visibleSeries.push(this.props.series[index])
+      } else {
+        line.hide(500)
+      }
+    })
+
+    this.visibleLines = visibleLines
+    this.visibleSeries = visibleSeries
+
   }
 
   findNearestLine(posX, posY) {
@@ -217,7 +236,7 @@ class Chart extends Component {
     })
 
     this.currentLine = this.visibleLines[closestIndex]
-    this.currentSeries = this.props.series[closestIndex]
+    this.currentSeries = this.visibleSeries[closestIndex]
     this.updateMarker(posX)
     this.setState({
       color: this.currentSeries.color,
