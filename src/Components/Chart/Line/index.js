@@ -29,7 +29,7 @@ class Line {
   // Plot the data on the canvas
   plotData() {
 
-    let curve = Type.strictCurve(
+    this.curve = Type.strictCurve(
       this.state.data,
       this.state.smallest,
       this.state.largest,
@@ -38,7 +38,14 @@ class Line {
       this.state.margin
     )
 
-    this.line = this.state.snap ? this.state.snap.path(curve) : null
+    this.start = Type.start(
+      this.state.data,
+      this.state.canvasHeight,
+      this.state.xWidth,
+      this.state.margin
+    )
+
+    this.line = this.state.snap ? this.state.snap.path(this.start) : null
     
     if (this.state.snap) { 
       this.line.attr({
@@ -50,6 +57,12 @@ class Line {
         this.line.attr({
           opacity: 0
         })
+      }
+
+      if (!this.state.parent) {
+        this.line.animate({
+          d: this.curve
+        }, 300, mina.easinout)
       }
     }
 
@@ -75,7 +88,8 @@ class Line {
   show(duration) {
 
     this.line.animate({
-      opacity: 1
+      opacity: 1,
+      d: this.curve
     }, duration, mina.easeinout)
 
   }
@@ -83,7 +97,8 @@ class Line {
   hide(duration) {
 
     this.line.animate({
-      opacity: 0
+      opacity: 0,
+      d: this.start
     }, duration, mina.easeinout)
 
   }

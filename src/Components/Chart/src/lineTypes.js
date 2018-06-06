@@ -4,6 +4,35 @@ const allow = 1
 
 const Plot = {
 
+  start: (data, height, xWidth, margin) => {
+
+    let started = false;
+
+    let bottom = margin ? height + margin : height;
+
+    let string = (data.map((value, index) => {
+
+      if (value && value !== NaN && !started) {
+
+        started = true
+        return `M${xWidth * index},${bottom} L`
+
+      } else if ((value || value == 0) && value !== NaN && started) {
+
+        return `${xWidth * index},${bottom} `
+
+      } else {
+        return
+      }
+
+    }))
+
+    string = string.join("")
+
+    return string
+
+  },
+
   straight: (data, min, max, height, xWidth, margin) => {
 
     let started = false;
@@ -16,12 +45,12 @@ const Plot = {
         value += margin
       }
 
-      if (value && value !== NaN && !started) {
+      if ((value || value == 0) && value !== NaN && !started) {
 
         started = true
-        return `M0,${value} L`
+        return `M${xWidth * index},${value},${value} L`
 
-      } else if (value && value !== NaN) {
+      } else if ((value || value == 0) && value !== NaN && started) {
 
         return `${xWidth * index},${value} `
 
@@ -54,12 +83,12 @@ const Plot = {
 
       let diff, prevHandle;
 
-      if (value && value !== NaN && !started) {
+      if ((value || value == 0) && value !== NaN && !started) {
 
         started = true;
-        return `M0,${value} S`
+        return `M${xWidth * index},${value},${value} S`
 
-      } else if (value && value !== NaN) {
+      } else if ((value || value == 0) && value !== NaN) {
 
         diff = value - prevVal
         prevHandle = value - (diff/2)
@@ -105,7 +134,7 @@ const Plot = {
         diff = nextVal - value
         return `M${xWidth * index},${value} C${(xWidth * index) + xWidth/2},${value + diff/2} `
 
-      } else if (index < data.length - 1 && value && value !== NaN) {
+      } else if (index < data.length - 1 && (value || value == 0) && value !== NaN) {
 
         // Getting the handles
         let x1 = index * xWidth - xWidth / 2
@@ -141,7 +170,7 @@ const Plot = {
         // Return the string to add a point with handles in between the end points
         return `${x1},${y1} ${index * xWidth},${value} ${x2},${y2} `
 
-      } else if (value && value !== NaN) {
+      } else if ((value || value == 0) && value !== NaN) {
 
         diff = value - prevVal
         return `${index * xWidth - xWidth/2},${value - diff/2} ${index * xWidth},${value} `
