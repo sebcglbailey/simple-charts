@@ -169,6 +169,14 @@ class Chart extends Component {
 
     })
 
+    this.visibleSeries.forEach((series, index) => {
+      if (series.default) {
+        this.visibleLines[index].show()
+      } else {
+        this.visibleLines[index].showBack()
+      }
+    })
+
     this.setState({
       currentLine: this.currentLine,
       currentSeries: this.currentSeries,
@@ -198,14 +206,16 @@ class Chart extends Component {
       let lineName = line.state.name
 
       if (line == this.currentLine) {
+        line.show()
         visibleLines.push(line)
         visibleSeries.push(this.props.series[index])
       } else if (this.currentLine.state.children && this.currentLine.state.children.includes(lineName)) {
         // Add in duration in ms to show() function to animate in
-        line.show()
+        line.showBack()
         visibleLines.push(line)
         visibleSeries.push(this.props.series[index])
-      } else {
+      } 
+      else {
         // Add in duration in ms to hide() function to animate out
         line.hide()
       }
@@ -213,7 +223,6 @@ class Chart extends Component {
 
     this.visibleLines = visibleLines
     this.visibleSeries = visibleSeries
-    console.log(visibleLines)
 
   }
 
@@ -248,6 +257,8 @@ class Chart extends Component {
     })
 
     Func.scrollTo(this.canvas.elem, posX, 350)
+
+    this.currentLine.moveToTop()
 
   }
 

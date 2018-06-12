@@ -75,7 +75,9 @@ class Line {
 
       this.line.attr({
         fill: "none",
-        stroke: this.state.color
+        stroke: this.state.color,
+        opacity: 0.5,
+        strokeLinecap: "round"
       })
       this.bg.attr({
         fill: bgFill,
@@ -114,27 +116,38 @@ class Line {
 
   }
 
-  show(duration) {
+  showBack(duration) {
+    this.show(duration, 0.4, 1)
+  }
+
+  show(duration, opacity, strokeWidth) {
+
+    opacity = opacity ? opacity : 1
+    strokeWidth = strokeWidth ? strokeWidth : 2
 
     if (duration) {
 
       this.line.animate({
-        opacity: 1,
-        d: this.curve
+        opacity: opacity,
+        d: this.curve,
+        strokeWidth: strokeWidth
       }, duration, mina.easeinout)
+
       this.bg.animate({
-        opacity: 0.5,
+        opacity: opacity,
         d: this.bgCurve
       }, duration, mina.easeinout)
 
     } else {
 
       this.line.attr({
-        opacity: 1,
-        d: this.curve
+        opacity: opacity,
+        d: this.curve,
+        strokeWidth: strokeWidth
       })
+
       this.bg.attr({
-        opacity: 0.5,
+        opacity: opacity,
         d: this.bgCurve
       })
 
@@ -167,6 +180,23 @@ class Line {
       })
 
     }
+
+  }
+
+  moveToTop() {
+
+    let lineDom = this.line.node
+    let bgDom = this.bg.node
+
+    let parentNode = lineDom.parentNode
+    let parentChildren = parentNode.children
+
+    lineDom.remove()
+    bgDom.remove()
+
+    parentNode.insertBefore(lineDom, parentChildren[parentChildren.length-1])
+    parentNode.insertBefore(bgDom, parentChildren[parentChildren.length-1])
+    // parentNode.insertAfter(domElem, parentChildren[parentChildren.length-1])
 
   }
 
