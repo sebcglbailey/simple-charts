@@ -12,6 +12,55 @@ const Functions = {
     return Functions.modulate(value, [min, max], [height, 0])
   },
 
+  median: (array) => {
+
+    let copy = array.slice(0)
+    let lastIndex;
+
+    copy.sort((a, b) => {
+      return a[1] - b[1]
+    })
+
+    copy.forEach((val, index) => {
+      if (val === undefined && !lastIndex) {
+        lastIndex = index
+      }
+    })
+
+    if (lastIndex) {
+      copy.splice(lastIndex)
+    }
+
+    const half = Math.floor(copy.length / 2)
+
+    let median;
+
+    if (copy.length % 2) {
+      median = copy[half]
+    } else {
+      median = (copy[half-1] + copy[half]) / 2
+    }
+
+    return median
+
+  },
+
+  hexToRgb: (hex, alpha) => {
+
+     // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+      let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+      hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+          return r + r + g + g + b + b;
+      });
+
+      let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      let r = parseInt(result[1], 16);
+      let g = parseInt(result[2], 16);
+      let b = parseInt(result[3], 16);
+      return result ? `rgba(${r}, ${g}, ${b}, ${alpha})` : null;
+
+  },
+
   roundToNearest: (value, nearest) => {
 
     let rem = value%nearest
@@ -28,10 +77,10 @@ const Functions = {
     let smallestValue = array[0]
 
     array.forEach((value) => {
-      if (!smallestValue) {
+      if (!smallestValue && smallestValue !== 0) {
         smallestValue = value
       }
-      if (value && value < smallestValue) {
+      if (typeof(value) == "number" && value !== NaN && value < smallestValue) {
         smallestValue = value
       }
     })
@@ -43,10 +92,10 @@ const Functions = {
     let largestValue = array[0]
 
     array.forEach((value) => {
-      if (!largestValue) {
+      if (!largestValue && largestValue !== 0) {
         largestValue = value
       }
-      if (value && value > largestValue) {
+      if (typeof(value) == "number" && value !== NaN && value > largestValue) {
         largestValue = value
       }
     })

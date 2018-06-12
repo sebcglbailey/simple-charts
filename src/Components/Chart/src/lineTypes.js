@@ -4,6 +4,23 @@ const allow = 1
 
 const Plot = {
 
+  addClose: (string, data, min, height, xWidth, margin) => {
+
+    let startIndex;
+    data.forEach((value, index) => {
+      if (value && value !== NaN && startIndex == undefined) {
+        startIndex = index
+      }
+    })
+
+    let canvasBottom = margin ? height + margin : height;
+
+    let bgAdd = ` V${canvasBottom} H${startIndex * xWidth} Z`
+
+    return string + bgAdd
+
+  },
+
   start: (data, height, xWidth, margin) => {
 
     let started = false;

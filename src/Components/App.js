@@ -45,7 +45,7 @@ let series = [
     },
     color: "#c77d7d",
     parent: "Short Term Debt",
-    children: ["Short Term Debt", "Payments", "Credit Limit"]
+    children: ["Credit Score", "Short Term Debt", "Payments", "Credit Limit"]
   },
   {
     name: "Payments",
@@ -55,7 +55,7 @@ let series = [
     },
     color: "#f7df71",
     parent: "Short Term Debt",
-    children: ["Short Term Debt", "Spending", "Credit Limit"]
+    children: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
   },
   {
     name: "Credit Limit",
@@ -65,7 +65,7 @@ let series = [
     },
     color: "#73b141",
     parent: "Short Term Debt",
-    children: ["Short Term Debt", "Payments", "Spending"]
+    children: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
   },
   {
     name: "Long Term Debt",
@@ -101,7 +101,7 @@ series.forEach((series) => {
   if (series.name == "Short Term Debt"
     || series.name == "Spending"
     || series.name == "Payments") {
-      series.min = stdMin
+      series.min = 0
       series.max = stdMax
   }
 })

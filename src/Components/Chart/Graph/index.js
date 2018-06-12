@@ -201,16 +201,19 @@ class Chart extends Component {
         visibleLines.push(line)
         visibleSeries.push(this.props.series[index])
       } else if (this.currentLine.state.children && this.currentLine.state.children.includes(lineName)) {
-        line.show(500)
+        // Add in duration in ms to show() function to animate in
+        line.show()
         visibleLines.push(line)
         visibleSeries.push(this.props.series[index])
       } else {
-        line.hide(500)
+        // Add in duration in ms to hide() function to animate out
+        line.hide()
       }
     })
 
     this.visibleLines = visibleLines
     this.visibleSeries = visibleSeries
+    console.log(visibleLines)
 
   }
 
