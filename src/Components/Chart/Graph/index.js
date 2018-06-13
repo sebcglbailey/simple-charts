@@ -324,6 +324,8 @@ class Chart extends Component {
           ref={(elem) => {this.svg = elem ? elem.elem : null}}
           snap={this.state.snap}
           width={this.state.svgWidth}
+          xWidth={this.props.xWidth}
+          length={this.state.length}
         />
         {this.props.marker ? (
           <Marker

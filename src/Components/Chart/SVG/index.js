@@ -12,6 +12,31 @@ class SVG extends Component {
 
   }
 
+  componentDidMount() {
+
+    console.log(this.elem.parentNode.offsetHeight)
+
+    let axis = []
+
+    for (let i = 0; i <= this.props.length; i++) {
+
+      let path = `M${i * this.props.xWidth},0 V${this.elem.parentNode.offsetHeight}`
+
+      axis.push(
+        <path
+          key={`axisMarker-${i+1}`}
+          d={path}
+          stroke="rgba(255,255,255,0.2)"
+        >
+        </path>
+      )
+
+    }
+
+    this.setState({axisMarkers: axis})
+
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.width !== this.props.width) {
       this.setState({ width: nextProps.width })
@@ -25,6 +50,7 @@ class SVG extends Component {
         className={styles.svg}
         style={{width: this.state.width}}
       >
+        {this.state.axisMarkers}
       </svg>
     )
   }
