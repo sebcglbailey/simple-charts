@@ -301,6 +301,11 @@ class Chart extends Component {
 
     // If there is a value update, update the value of the marker label
     if (typeof(val) == "number" && val !== NaN) {
+
+      if (this.state.currentSeries && this.state.currentSeries.formatValue) {
+        val = this.state.currentSeries.formatValue(val)
+      }
+
       this.marker.updateValue(val)
     }
 
@@ -331,7 +336,12 @@ class Chart extends Component {
           <Marker
             ref={(elem) => {this.marker = elem}}
             color={this.state.color}
-            value={this.state.currentSeries && this.state.currentSeries.dataArray ? this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] : null}
+            value={
+              this.state.currentSeries && this.state.currentSeries.dataArray && this.state.currentSeries.formatValue ?
+                this.state.currentSeries.formatValue(this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1]) :
+              this.state.currentSeries && this.state.currentSeries.dataArray ?
+                this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] :
+                null}
             label={this.state.currentSeries ? this.state.currentSeries.name : null}
           />
         ) : null}

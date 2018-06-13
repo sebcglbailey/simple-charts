@@ -12,6 +12,14 @@ const Functions = {
     return Functions.modulate(value, [min, max], [height, 0])
   },
 
+  formatMoney: (value, currency = "£") => {
+
+    let money = value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+
+    return `${currency}${money}`
+
+  },
+
   median: (array) => {
 
     let copy = array.slice(0)

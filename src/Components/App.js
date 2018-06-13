@@ -34,6 +34,9 @@ let series = [
     filter: (value) => {
       return value.balance
     },
+    formatValue: (value) => {
+      return Func.formatMoney(value)
+    },
     color: "#f3ba8b",
     children: ["Credit Score", "Spending", "Payments", "Credit Limit"]
   },
@@ -42,6 +45,9 @@ let series = [
     data: data.data[1].values,
     filter: (value) => {
       return value.ccSpending
+    },
+    formatValue: (value) => {
+      return Func.formatMoney(value)
     },
     color: "#c77d7d",
     parent: "Short Term Debt",
@@ -53,6 +59,9 @@ let series = [
     filter: (value) => {
       return value.ccPayment
     },
+    formatValue: (value) => {
+      return Func.formatMoney(value)
+    },
     color: "#f7df71",
     parent: "Short Term Debt",
     children: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
@@ -63,6 +72,9 @@ let series = [
     filter: (value) => {
       return value.ccLimit
     },
+    formatValue: (value) => {
+      return Func.formatMoney(value)
+    },
     color: "#73b141",
     parent: "Short Term Debt",
     children: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
@@ -72,6 +84,10 @@ let series = [
     data: data.data[2].values,
     filter: (value) => {
       return value.balance
+    },
+    formatValue: (value) => {
+      console.log(value)
+      return Func.formatMoney(value)
     },
     color: "#f3cddd",
     children: ["Credit Score", "Short Term Debt"]
