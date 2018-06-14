@@ -1,0 +1,50 @@
+.container {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  width: 175%;
+  height: 175%;
+  border-radius: 100%;
+  top: -37.5%;
+  left: -37.5%;
+  background-color: inherit;
+  opacity: 0.5;
+}
+
+.container::after {
+  content: '';
+  position: absolute;
+  width: 250%;
+  height: 250%;
+  border-radius: 100%;
+  top: -75%;
+  left: -75%;
+  background-color: inherit;
+  opacity: 0.25;
+}
+
+.labels {
+  color: #fff;
+  font-family: Arial, sans-serif;
+  position: relative;
+  top: -4rem;
+}
+
+.value {
+  font-size: 1.8rem;
+  font-weight: 100;
+}
+
+.label {
+  font-size: 0.8rem;
+  white-space: nowrap;
+  margin-top: 0.05rem;
+  font-weight: 600;
+}

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
 import Chart, { Marker } from './Chart/';
+import Timeline from './Timeline/';
 
 import addEmptyData from './Chart/src/addEmptyData';
 import Func from './Chart/src/functions';
@@ -26,7 +27,7 @@ let series = [
     min: 0,
     max: 700,
     color: "#aae1ea",
-    children: ["Short Term Debt", "Long Term Debt"]
+    show: ["Short Term Debt", "Long Term Debt"]
   },
   {
     name: "Short Term Debt",
@@ -38,7 +39,7 @@ let series = [
       return Func.formatMoney(value)
     },
     color: "#f3ba8b",
-    children: ["Credit Score", "Spending", "Payments", "Credit Limit"]
+    show: ["Credit Score", "Spending", "Payments", "Credit Limit"]
   },
   {
     name: "Spending",
@@ -51,7 +52,7 @@ let series = [
     },
     color: "#c77d7d",
     parent: "Short Term Debt",
-    children: ["Credit Score", "Short Term Debt", "Payments", "Credit Limit"]
+    show: ["Credit Score", "Short Term Debt", "Payments", "Credit Limit"]
   },
   {
     name: "Payments",
@@ -64,7 +65,7 @@ let series = [
     },
     color: "#f7df71",
     parent: "Short Term Debt",
-    children: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
+    show: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
   },
   {
     name: "Credit Limit",
@@ -77,7 +78,7 @@ let series = [
     },
     color: "#73b141",
     parent: "Short Term Debt",
-    children: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
+    show: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
   },
   {
     name: "Long Term Debt",
@@ -89,7 +90,7 @@ let series = [
       return Func.formatMoney(value)
     },
     color: "#f3cddd",
-    children: ["Credit Score", "Short Term Debt"]
+    show: ["Credit Score", "Short Term Debt"]
   }
 ]
 
@@ -121,7 +122,7 @@ series.forEach((series) => {
   }
 })
 
-let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth)
+let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth) + 1
 
 class App extends Component {
   constructor(props) {
@@ -140,21 +141,33 @@ class App extends Component {
 
   }
 
+  // render() {
+  // 	return(
+  //     <div className={styles.container}>
+  // 		  <Chart
+  //         data={testData}
+  //         series={series}
+  //         length={length}
+  //         centered
+  //         marker
+  //         margin={100}
+  //         xAxisMarkers
+  //         xWidth={this.state.xWidth}
+  //       />
+  //     </div>
+  // 	)
+  // }
+
   render() {
-  	return(
+    return(
       <div className={styles.container}>
-  		  <Chart
-          data={testData}
+        <Timeline
           series={series}
           length={length}
-          centered
-          marker
-          margin={100}
-          xAxisMarkers
           xWidth={this.state.xWidth}
         />
       </div>
-  	)
+    )
   }
 
 }

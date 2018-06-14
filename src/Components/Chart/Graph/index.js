@@ -338,37 +338,39 @@ class Chart extends Component {
   render() {
 
     return(
-      <Canvas
-        ref={(elem) => {
-          this.canvasNode = elem ? elem.elem : null
-          this.canvas = elem ? elem : null
-        }}
-        centered={this.props.centered}
-        updateHelper={this.updateHelper}
-        updateHelperOnClick={this.updateHelperOnClick}
-        scrollLeft={this.state.canvasScroll}
-      >
-        <SVG
-          ref={(elem) => {this.svg = elem ? elem.elem : null}}
-          snap={this.state.snap}
-          width={this.state.svgWidth}
-          xWidth={this.props.xWidth}
-          length={this.state.length}
-        />
-        {this.props.marker ? (
-          <Marker
-            ref={(elem) => {this.marker = elem}}
-            color={this.state.color}
-            value={
-              this.state.currentSeries && this.state.currentSeries.dataArray && this.state.currentSeries.formatValue ?
-                this.state.currentSeries.formatValue(this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1]) :
-              this.state.currentSeries && this.state.currentSeries.dataArray ?
-                this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] :
-                null}
-            label={this.state.currentSeries ? this.state.currentSeries.name : null}
+      <div className={styles.container}>
+        <Canvas
+          ref={(elem) => {
+            this.canvasNode = elem ? elem.elem : null
+            this.canvas = elem ? elem : null
+          }}
+          centered={this.props.centered}
+          updateHelper={this.updateHelper}
+          updateHelperOnClick={this.updateHelperOnClick}
+          scrollLeft={this.state.canvasScroll}
+        >
+          <SVG
+            ref={(elem) => {this.svg = elem ? elem.elem : null}}
+            snap={this.state.snap}
+            width={this.state.svgWidth}
+            xWidth={this.props.xWidth}
+            length={this.state.length}
           />
-        ) : null}
-      </Canvas>
+          {this.props.marker ? (
+            <Marker
+              ref={(elem) => {this.marker = elem}}
+              color={this.state.color}
+              value={
+                this.state.currentSeries && this.state.currentSeries.dataArray && this.state.currentSeries.formatValue ?
+                  this.state.currentSeries.formatValue(this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1]) :
+                this.state.currentSeries && this.state.currentSeries.dataArray ?
+                  this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] :
+                  null}
+              label={this.state.currentSeries ? this.state.currentSeries.name : null}
+            />
+          ) : null}
+        </Canvas>
+      </div>
     )
   }
 }
