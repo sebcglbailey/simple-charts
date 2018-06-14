@@ -1,8 +1,8 @@
 .marker {
   position: absolute;
-  width: 1em;
-  height: 1em;
-  border-radius: 1em;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 1rem;
   transform: translateX(-50%) translateY(-50%);
 }
 
@@ -34,17 +34,17 @@
   color: #fff;
   font-family: Arial, sans-serif;
   position: relative;
-  top: -50pt;
+  top: -4rem;
 }
 
 .value {
-  font-size: 21pt;
+  font-size: 1.8rem;
   font-weight: 100;
 }
 
 .label {
-  font-size: 10pt;
+  font-size: 0.8rem;
   white-space: nowrap;
-  margin-top: 2pt;
+  margin-top: 0.05rem;
   font-weight: 600;
 }

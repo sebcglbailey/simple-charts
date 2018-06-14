@@ -77,7 +77,7 @@ class Canvas extends Component {
   getClickPosition(event) {
 
     this.mouseX = event.clientX
-    this.mouseY = event.clientY
+    this.mouseY = event.clientY - this.elem.getBoundingClientRect().top
 
     let helperX = this.mouseX - (this.props.centered ? window.innerWidth / 2 : 0) + this.elem.scrollLeft
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 
@@ -86,7 +86,6 @@ let series = [
       return value.balance
     },
     formatValue: (value) => {
-      console.log(value)
       return Func.formatMoney(value)
     },
     color: "#f3cddd",
@@ -124,20 +123,40 @@ series.forEach((series) => {
 
 let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth)
 
-const App = () => {
-	return(
-    <div className={styles.container}>
-		  <Chart
-        data={testData}
-        series={series}
-        length={length}
-        centered
-        marker
-        margin={100}
-        xAxisMarkers
-      />
-    </div>
-	)
+class App extends Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      xWidth: window.innerWidth / 3 < 200 ? window.innerWidth / 3 : 200
+    }
+  }
+
+  componentDidMount() {
+
+    window.addEventListener("resize", () => {
+      this.setState({ xWidth: window.innerWidth / 3 < 200 ? window.innerWidth / 3 : 200})
+    })
+
+  }
+
+  render() {
+  	return(
+      <div className={styles.container}>
+  		  <Chart
+          data={testData}
+          series={series}
+          length={length}
+          centered
+          marker
+          margin={100}
+          xAxisMarkers
+          xWidth={this.state.xWidth}
+        />
+      </div>
+  	)
+  }
+
 }
 
 ReactDOM.render(

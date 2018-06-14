@@ -14,8 +14,6 @@ class SVG extends Component {
 
   componentDidMount() {
 
-    console.log(this.elem.parentNode.offsetHeight)
-
     let axis = []
 
     for (let i = 0; i <= this.props.length; i++) {

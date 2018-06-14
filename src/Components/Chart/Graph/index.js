@@ -40,6 +40,7 @@ class Chart extends Component {
 
     // Bind functions
     this.createSnapComponent = this.createSnapComponent.bind(this)
+    this.replotGraph = this.replotGraph.bind(this)
     this.plotData = this.plotData.bind(this)
     this.getHeight = this.getHeight.bind(this)
     this.switchToYears = this.switchToYears.bind(this)
@@ -51,6 +52,7 @@ class Chart extends Component {
 
   // Setup snap component and canvas height
   componentDidMount() {
+
     // Setup snap instance and svg width
     this.createSnapComponent()
     // Get the height of the canvas
@@ -62,10 +64,17 @@ class Chart extends Component {
       this.markerHelper = this.helper.build(this.snap, this.canvasNode.offsetHeight)
     }
 
-    // Switch to years if canvas is clicked
-    // this.canvasNode.addEventListener("click", this.switchToYears)
+    window.addEventListener("resize", () => {
+      this.replotGraph()
+    })
 
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   if (nextProps.xWidth !== this.props.xWidth) {
+  //     this.replotGraph()
+  //   }
+  // }
 
   // Plot the data after the component has mounted & updated its state with snap and height
   componentDidUpdate(prevProps, prevState) {
@@ -81,6 +90,15 @@ class Chart extends Component {
 
     // Initiate the position of the marker
     this.canvas.getScrollPosition()
+  }
+
+  replotGraph() {
+    this.visibleLines.forEach((line) => {
+      line.line.remove()
+      line.bg.remove()
+    })
+    this.createSnapComponent()
+    this.getHeight()
   }
 
   // Get the height of the canvas
@@ -188,6 +206,9 @@ class Chart extends Component {
   // Update the vertical helper to the current scroll / hover position
   updateHelper(posX, scroll) {
 
+    posX -= 1
+    scroll -= 1
+
     this.markerHelper.update(posX)
     this.updateMarker(posX, scroll)
 
@@ -269,6 +290,8 @@ class Chart extends Component {
     // Get the intersection point with the current line
     let intersection = this.markerHelper.getIntersection(Snap, this.currentLine.line)
     let posY = intersection ? intersection.y : null
+
+    posY += posY ? this.canvasNode.getBoundingClientRect().top : null
     
     // Get the left position of the marker
     let posLeft = null;
@@ -279,9 +302,9 @@ class Chart extends Component {
 
 
     // Change the left position of the marker if bounds are beyond the line
-    if (posX < 0) {
+    if (posX < 0 && typeof(posLeft) == "number") {
       posLeft -= posX
-    } else if (posX > this.svg.width.baseVal.value) {
+    } else if (posX > this.svg.width.baseVal.value && typeof(posLeft) == "number") {
       posLeft -= posX - this.svg.width.baseVal.value
     }
 
