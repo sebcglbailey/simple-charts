@@ -25,13 +25,26 @@ class Graph extends Component {
     this.plotGraph = this.plotGraph.bind(this)
     this.drawLines = this.drawLines.bind(this)
 
+    this.showVisibleLines = this.showVisibleLines.bind(this)
+
   }
 
   componentDidMount() {
 
-    this.scroller.scrollLeft = this.state.length * this.state.xWidth
+    // this.scroller.scrollLeft = this.state.length * this.state.xWidth
+    this.scroller.scrollLeft = this.svg.getBoundingClientRect().width - 1
 
     this.plotGraph()
+
+  }
+
+  componentDidUpdate(nextProps, nextState) {
+
+    if (nextState.currentLine !== this.state.currentLine) {
+
+      this.showVisibleLines()
+
+    }
 
   }
 
@@ -60,6 +73,7 @@ class Graph extends Component {
     let canvasHeight = this.canvas.offsetHeight
 
     this.lines = []
+    let visibleLines = []
 
     this.state.series.forEach((series, index) => {
 
@@ -77,19 +91,48 @@ class Graph extends Component {
         svg: this.svg
       })
 
-      this.lines.push({
-        name: series.name,
-        line: line
-      })
+      this.lines.push(line)
 
-      if (series.default) {
-        this.setState({
-          currentLine: line,
-          currentSeries: series
-        })
+      if (!series.parent) {
+        visibleLines.push(line)
       }
 
     })
+
+    let currentSeries = this.state.series.filter((series) => {
+      return series.default
+    })[0]
+    let currentLine = this.lines.filter((line) => {
+      return line.name = currentSeries.name
+    })[0]
+
+    this.setState({
+      currentLine: currentLine,
+      currentSeries: currentSeries,
+      visibleLines: visibleLines
+    })
+
+    this.showVisibleLines(visibleLines, currentLine)
+
+  }
+
+  showVisibleLines(visible, current) {
+
+    let visibleLines = visible ? visible : this.state.visibleLines
+    let currentLine = current? current : this.state.currentLine
+
+    if (visibleLines) {
+      
+      visibleLines.forEach((line) => {
+
+        if (line == currentLine) {
+          line.show()
+        } else {
+          line.showBack()
+        }
+
+      })
+    }
 
   }
 

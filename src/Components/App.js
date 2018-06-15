@@ -27,7 +27,7 @@ let series = [
     min: 0,
     max: 700,
     color: "#aae1ea",
-    show: ["Short Term Debt", "Long Term Debt"]
+    children: ["Short Term Debt", "Long Term Debt"]
   },
   {
     name: "Short Term Debt",
@@ -39,7 +39,7 @@ let series = [
       return Func.formatMoney(value)
     },
     color: "#f3ba8b",
-    show: ["Credit Score", "Spending", "Payments", "Credit Limit"]
+    children: ["Credit Score", "Spending", "Payments", "Credit Limit"]
   },
   {
     name: "Spending",
@@ -52,7 +52,7 @@ let series = [
     },
     color: "#c77d7d",
     parent: "Short Term Debt",
-    show: ["Credit Score", "Short Term Debt", "Payments", "Credit Limit"]
+    children: ["Credit Score", "Short Term Debt", "Payments", "Credit Limit"]
   },
   {
     name: "Payments",
@@ -65,7 +65,7 @@ let series = [
     },
     color: "#f7df71",
     parent: "Short Term Debt",
-    show: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
+    children: ["Credit Score", "Short Term Debt", "Spending", "Credit Limit"]
   },
   {
     name: "Credit Limit",
@@ -78,7 +78,7 @@ let series = [
     },
     color: "#73b141",
     parent: "Short Term Debt",
-    show: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
+    children: ["Credit Score", "Short Term Debt", "Payments", "Spending"]
   },
   {
     name: "Long Term Debt",
@@ -90,7 +90,7 @@ let series = [
       return Func.formatMoney(value)
     },
     color: "#f3cddd",
-    show: ["Credit Score", "Short Term Debt"]
+    children: ["Credit Score", "Short Term Debt"]
   }
 ]
 
@@ -147,7 +147,7 @@ class App extends Component {
   // 		  <Chart
   //         data={testData}
   //         series={series}
-  //         length={length}
+  //         length={length-1}
   //         centered
   //         marker
   //         margin={100}

@@ -33,7 +33,7 @@ class Timeline extends Component {
 
 Timeline.defaultProps = {
   xWidth: 200,
-  margin: 100
+  margin: 0
 }
 
 Timeline.propTypes = {

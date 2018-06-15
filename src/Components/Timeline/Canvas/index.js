@@ -24,12 +24,57 @@ class Canvas extends Component {
     }
   }
 
+  componentDidMount() {
+
+  }
 
   componentWillReceiveProps(nextProps) {
 
     if (nextProps.scrollLeft !== this.props.scrollLeft) {
+
+      if (nextProps.currentLine) {
+
+        let markerPos = nextProps.currentLine.getMarkerIntersection(-nextProps.scrollLeft + window.innerWidth / 2)
+        markerPos = markerPos[0] ? markerPos[0] : null
+
+        if (markerPos) {
+          this.setState({
+            markerPos: {
+              static: false,
+              top: markerPos.y,
+              left: this.state.scrollLeft ? -this.state.scrollLeft + window.innerWidth / 2 : null
+            },
+            scrollLeft: nextProps.scrollLeft
+          })
+        } else if (!this.state.markerPos.static) {
+          this.setState({
+            markerPos: {
+              top: this.state.markerPos.top,
+              left: this.state.markerPos.left,
+              static: true
+            },
+            scrollLeft: nextProps.scrollLeft
+          })
+        } else {
+          this.setState({
+            scrollLeft: nextProps.scrollLeft
+          })
+        }
+
+      } else {
+
+        this.setState({
+          scrollLeft: nextProps.scrollLeft
+        })
+
+      }
+    }
+
+    if (nextProps.currentSeries !== this.props.currentSeries) {
       this.setState({
-        scrollLeft: nextProps.scrollLeft
+        currentSeries: nextProps.currentSeries,
+        currentLine: nextProps.currentLine,
+        visibleLines: nextProps.visibleLines
       })
     }
 
@@ -37,6 +82,12 @@ class Canvas extends Component {
 
 
   render() {
+
+    let markerValue = this.state.currentSeries && this.state.currentSeries.dataArray && this.state.currentSeries.formatValue ?
+        this.state.currentSeries.formatValue(this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1]) :
+      this.state.currentSeries && this.state.currentSeries.dataArray ?
+        this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] :
+        null
 
     return (
       <div
@@ -48,15 +99,10 @@ class Canvas extends Component {
         }}
       >
         <Marker
-          left={-this.state.scrollLeft + window.innerWidth / 2}
+          left={this.state.markerPos.static ? this.state.markerPos.left : -this.state.scrollLeft + window.innerWidth / 2}
           top={this.state.markerPos.top}
-          color={this.state.color}
-          value={
-            this.state.currentSeries && this.state.currentSeries.dataArray && this.state.currentSeries.formatValue ?
-              this.state.currentSeries.formatValue(this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1]) :
-            this.state.currentSeries && this.state.currentSeries.dataArray ?
-              this.state.currentSeries.dataArray[this.state.currentSeries.dataArray.length - 1] :
-              null}
+          color={this.state.currentSeries ? this.state.currentSeries.color : null}
+          value={markerValue}
           label={this.state.currentSeries ? this.state.currentSeries.name : null}
         />
         <SVG

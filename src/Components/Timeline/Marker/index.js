@@ -24,11 +24,16 @@ class Marker extends Component {
 
     if (nextProps.left !== this.props.left || nextProps.top !== this.props.top) {
 
+      let left = nextProps.left && nextProps.left !== NaN ? nextProps.left : 0
+      let top = nextProps.top && nextProps.top !== NaN ? nextProps.top : 0
+
       this.setState({
+        value: nextProps.value,
+        label: nextProps.label,
         style: {
           backgroundColor: nextProps.color,
-          left: nextProps.left && nextProps.left !== NaN ? nextProps.left : 0,
-          top: nextProps.top && nextProps.top !== NaN ? nextProps.top : 0
+          left: left,
+          top: top
         }
       })
 

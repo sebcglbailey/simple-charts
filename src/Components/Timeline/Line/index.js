@@ -8,9 +8,12 @@ class Line {
 
     this.props = props
 
+    this.svg = props.svg
+
     this.snap = Snap(props.svg)
 
     this.plotData()
+    this.plotHelper()
 
   }
 
@@ -83,6 +86,59 @@ class Line {
       }
 
     }
+
+  }
+
+  plotHelper() {
+
+    let helperPath = `M0,0 V${this.svg.parentNode.offsetHeight}`
+    this.markerHelper = this.snap ? this.snap.path(helperPath) : null
+    this.clickHelper = this.snap ? this.snap.path(helperPath) : null
+
+    if (this.markerHelper) {
+      this.markerHelper.attr({
+        stroke: "none"
+      })
+      this.clickHelper.attr({
+        stroke: "none"
+      })
+    }
+
+  }
+
+  getMarkerIntersection(posX) {
+
+    let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
+
+    if (this.markerHelper) {
+      this.markerHelper.attr({
+        d: helperPath
+      })
+    }
+
+    let intersection = Snap ? Snap.path.intersection(this.line, this.markerHelper) : null
+
+    return intersection
+  }
+
+  getClickIntersections(lines, posX) {
+
+    let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
+
+    if (this.clickHelper) {
+      this.clickHelper.attr({
+        d: helperPath
+      })
+    }
+
+    let intersections = []
+
+    lines.forEach((line) => {
+      let intersection = this.snap ? this.snap.path.intersection(line.line, this.clickHelper) : null
+      intersections.push(intersection)
+    })
+
+    return intersections
 
   }
 
