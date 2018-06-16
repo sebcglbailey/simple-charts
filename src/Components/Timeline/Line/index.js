@@ -7,6 +7,8 @@ class Line {
   constructor(props) {
 
     this.props = props
+    this.series = props.series
+    this.name = props.name
 
     this.svg = props.svg
 
@@ -21,9 +23,9 @@ class Line {
   plotData() {
 
     this.curve = Type.strictCurve(
-      this.props.data,
-      this.props.min,
-      this.props.max,
+      this.series.dataArray,
+      this.series.min,
+      this.series.max,
       this.props.canvasHeight,
       this.props.xWidth,
       this.props.margin
@@ -31,15 +33,15 @@ class Line {
 
     this.bgCurve = Type.addClose(
       this.curve,
-      this.props.data,
-      this.props.min,
+      this.series.dataArray,
+      this.series.min,
       this.props.canvasHeight,
       this.props.xWidth,
       this.props.margin
     )
 
     this.start = Type.start(
-      this.props.data,
+      this.series.dataArray,
       this.props.canvasHeight,
       this.props.xWidth,
       this.props.margin
@@ -47,7 +49,7 @@ class Line {
 
     this.bgStart = Type.addClose(
       this.start,
-      this.props.data,
+      this.series.dataArray,
       this.props.canvasHeight,
       this.props.xWidth,
       this.props.margin
@@ -56,16 +58,16 @@ class Line {
     this.line = this.snap ? this.snap.path(this.curve) : null
     this.bg = this.snap ? this.snap.path(this.bgCurve) : null
 
-    let bgColor1 = Func.hexToRgb(this.props.color, 0.5)
-    let bgColor2 = Func.hexToRgb(this.props.color, 0)
-    let bgStop = 1 - Func.median(this.props.data) / this.props.max
+    let bgColor1 = Func.hexToRgb(this.series.color, 0.5)
+    let bgColor2 = Func.hexToRgb(this.series.color, 0)
+    let bgStop = 1 - Func.median(this.series.dataArray) / this.series.max
     
     if (this.snap) { 
       let bgFill = this.snap.gradient(`l(0.5,0.4,0.5,0.8)${bgColor1}:${bgStop}-${bgColor2}:0`);
 
       this.line.attr({
         fill: "none",
-        stroke: this.props.color,
+        stroke: this.series.color,
         opacity: 0.5,
         strokeLinecap: "round"
       })
@@ -74,7 +76,7 @@ class Line {
         opacity: 0.5
       })
 
-      if (this.props.parent) {
+      if (this.series.parent) {
         this.line.attr({
           opacity: 0,
           d: this.start
@@ -106,6 +108,15 @@ class Line {
 
   }
 
+  getValue(posX) {
+
+    let index = Math.round(posX / this.props.xWidth)
+    let data = this.series.dataArray[index]
+
+    return data
+
+  }
+
   getMarkerIntersection(posX) {
 
     let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
@@ -121,9 +132,9 @@ class Line {
     return intersection
   }
 
-  getClickIntersections(lines, posX) {
+  getClosestLineOnClick(visible, posX, posY) {
 
-    let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
+    let helperPath = `M${posX},-10 V${this.svg.parentNode.offsetHeight+10}`
 
     if (this.clickHelper) {
       this.clickHelper.attr({
@@ -133,24 +144,47 @@ class Line {
 
     let intersections = []
 
-    lines.forEach((line) => {
-      let intersection = this.snap ? this.snap.path.intersection(line.line, this.clickHelper) : null
+    visible.forEach((line) => {
+      let intersection = Snap ? Snap.path.intersection(line.line, this.clickHelper) : null
       intersections.push(intersection)
     })
 
-    return intersections
+    let closestIndex, distance;
+    intersections.forEach((intersection, index) => {
+
+      let thisDistance;
+      if (intersection[0]) {
+        thisDistance = Math.abs(posY - intersection[0].y)
+      }
+
+      if (distance == undefined && thisDistance !== undefined && thisDistance !== NaN) {
+        distance = thisDistance
+        closestIndex = index
+      }
+
+      if (thisDistance < distance) {
+        distance = thisDistance
+        closestIndex = index
+      }
+
+    })
+
+    let closestLine = visible[closestIndex]
+    let closestSeries = visible[closestIndex].series
+
+    return {closestLine: closestLine, closestSeries: closestSeries}
 
   }
 
   updatePath(options) {
 
     let newCurve = Type.strictCurve(
-      this.props.data,
-      this.props.min,
-      this.props.largest,
-      this.props.canvasHeight,
+      this.series.dataArray,
+      this.series.min,
+      this.series.largest,
+      options.canvasHeight,
       options.xWidth,
-      this.props.margin
+      options.margin
     )
 
     this.line.attr({

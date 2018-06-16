@@ -22,22 +22,18 @@ class Marker extends Component {
 
   componentWillReceiveProps(nextProps) {
 
-    if (nextProps.left !== this.props.left || nextProps.top !== this.props.top) {
+    let left = nextProps.left && nextProps.left !== NaN ? nextProps.left : 0
+    let top = nextProps.top && nextProps.top !== NaN ? nextProps.top : 0
 
-      let left = nextProps.left && nextProps.left !== NaN ? nextProps.left : 0
-      let top = nextProps.top && nextProps.top !== NaN ? nextProps.top : 0
-
-      this.setState({
-        value: nextProps.value,
-        label: nextProps.label,
-        style: {
-          backgroundColor: nextProps.color,
-          left: left,
-          top: top
-        }
-      })
-
-    }
+    this.setState({
+      value: nextProps.value,
+      label: nextProps.label,
+      style: {
+        backgroundColor: nextProps.color,
+        left: left,
+        top: top
+      }
+    })
 
   }
 

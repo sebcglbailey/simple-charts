@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Func from '../src/functions';
 
 import styles from './styles.css';
 
@@ -20,6 +21,7 @@ class Graph extends Component {
     }
 
     this.updateScrollPosition = this.updateScrollPosition.bind(this)
+    this.handleScrollerClick = this.handleScrollerClick.bind(this)
 
     // Binding plotting functions
     this.plotGraph = this.plotGraph.bind(this)
@@ -79,15 +81,10 @@ class Graph extends Component {
 
       let line = new Line({
         name: series.name,
-        data: series.dataArray,
-        min: series.min,
-        max: series.max,
+        series: series,
         canvasHeight: canvasHeight - this.state.margin*2,
         xWidth: this.state.xWidth,
         margin: this.state.margin,
-        color: series.color,
-        parent: series.parent,
-        children: series.children,
         svg: this.svg
       })
 
@@ -103,7 +100,7 @@ class Graph extends Component {
       return series.default
     })[0]
     let currentLine = this.lines.filter((line) => {
-      return line.name = currentSeries.name
+      return line.name == currentSeries.name
     })[0]
 
     this.setState({
@@ -123,16 +120,45 @@ class Graph extends Component {
 
     if (visibleLines) {
       
-      visibleLines.forEach((line) => {
+      this.lines.forEach((line) => {
 
         if (line == currentLine) {
           line.show()
-        } else {
+        } else if (visibleLines.includes(line)) {
           line.showBack()
+        } else {
+          line.hide()
         }
 
       })
     }
+
+  }
+
+  handleScrollerClick(event) {
+
+    let mouseX = event.clientX - this.scroller.getBoundingClientRect().left
+    let mouseY = event.clientY - this.container.getBoundingClientRect().top
+
+    let posX = mouseX - window.innerWidth / 2 + this.scroller.scrollLeft
+    let duration = Math.abs(window.innerWidth/2 - mouseX)
+    duration = Func.modulate(duration, [0, window.innerWidth/2], [200, 300])
+
+    Func.scrollTo(this.scroller, posX, duration)
+
+    let {closestLine, closestSeries} = this.state.currentLine.getClosestLineOnClick(this.state.visibleLines, posX, mouseY)
+
+    let visibleLines = this.lines.filter((line) => {
+
+      return closestSeries.children.includes(line.name) || line == closestLine
+
+    })
+
+    this.setState({
+      currentLine: closestLine,
+      currentSeries: closestSeries,
+      visibleLines: visibleLines
+    })
 
   }
 
@@ -142,6 +168,7 @@ class Graph extends Component {
 
     return(
       <div
+        ref={(elem) => {this.container = elem}}
         className={styles.container}
         style={{ margin: margin, height: height}}
       >
@@ -163,6 +190,7 @@ class Graph extends Component {
             this.scroller = this.scroller ? this.scroller : elem ? elem.container : null
           }}
           onScroll={this.updateScrollPosition}
+          onClick={this.handleScrollerClick}
           width={this.state.canvasWidth + window.innerWidth / 2}
         />
       </div>

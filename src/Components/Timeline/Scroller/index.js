@@ -13,22 +13,31 @@ class Scroller extends Component {
     }
 
     this.updateScrollPosition = this.updateScrollPosition.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   componentDidMount() {
 
-    this.container.addEventListener("scroll", (event) => {
-      this.updateScrollPosition(event)
-    })
+    this.container.addEventListener("scroll", this.updateScrollPosition)
+
+    this.container.addEventListener("click", this.handleClick)
 
   }
 
-  updateScrollPosition(e) {
+  updateScrollPosition(event) {
 
     if (this.props.onScroll) {
 
-      this.props.onScroll(e.srcElement.scrollLeft - window.innerWidth / 2)
+      this.props.onScroll(event.srcElement.scrollLeft - window.innerWidth / 2)
 
+    }
+
+  }
+
+  handleClick(event) {
+
+    if (this.props.onClick) {
+      this.props.onClick(event)
     }
 
   }

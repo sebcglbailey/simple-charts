@@ -165,6 +165,7 @@ class App extends Component {
           series={series}
           length={length}
           xWidth={this.state.xWidth}
+          margin={32}
         />
       </div>
     )

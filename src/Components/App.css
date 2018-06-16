@@ -20,6 +20,6 @@ body {
 
 @media all and (max-width: 420px) {
   html {
-    font-size: 16pt;
+    font-size: 14pt;
   }
 }

@@ -29,7 +29,7 @@ class SVG extends Component {
         <path
           key={`axisMarker-${i+1}`}
           d={path}
-          stroke="rgba(255,255,255,0.2)"
+          stroke="rgba(255,255,255,0.1)"
         >
         </path>
       )
