@@ -7,6 +7,7 @@ import Canvas from '../Canvas/';
 import Scroller from '../Scroller/';
 import Line from '../Line/';
 import Marker from '../Marker/';
+import Events from '../Events/';
 
 class Graph extends Component {
   constructor(props) {
@@ -165,23 +166,26 @@ class Graph extends Component {
       this.setState({
         currentLine: closestLine,
         currentSeries: closestSeries,
-        visibleLines: visibleLines
+        visibleLines: visibleLines,
+        currentEvents: null
       })
 
+    }
+
+    let markerIndex = closestLine.getIndex(posX)
+    let markerValue = closestLine.getValue(markerIndex)
+    
+    let seriesMonth = closestSeries && closestSeries.data ? closestSeries.data[markerIndex] : null
+    let seriesEvents = seriesMonth ? seriesMonth.events : undefined
+    
+    if (seriesEvents && seriesEvents.length > 0) {
+      this.setState({
+        currentEvents: seriesEvents
+      })
     } else {
-
-      let markerIndex = this.state.currentLine.getIndex(posX)
-      let markerValue = this.state.currentLine.getValue(markerIndex)
-      
-      let seriesMonth = this.state.currentSeries && this.state.currentSeries.data ? this.state.currentSeries.data[markerIndex] : null
-      let seriesEvents = seriesMonth ? seriesMonth.events : undefined
-      
-      if (seriesEvents && seriesEvents.length > 0) {
-        this.setState({
-          currentEvents: seriesEvents
-        })
-      }
-
+      this.setState({
+        currentEvents: null
+      })
     }
 
   }
@@ -245,6 +249,10 @@ class Graph extends Component {
           visibleLines={this.state.visibleLines}
           currentLine={this.state.currentLine}
           currentSeries={this.state.currentSeries}
+        />
+        <Events
+          eventList={this.state.currentEvents}
+          margin={this.state.margin}
         />
         <Scroller
           ref={(elem) => {
