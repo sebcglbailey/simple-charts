@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import styles from './styles.css';
 
@@ -18,6 +19,12 @@ class Marker extends Component {
     }
 
     this.updateValue = this.updateValue.bind(this)
+  }
+
+  componentDidMount() {
+
+    this.marker.addEventListener("click", this.props.onClick)
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,6 +57,7 @@ class Marker extends Component {
 
     return(
       <div
+        ref={(elem) => {this.marker = elem}}
         className={styles.container}
         style={this.state.style}
       >
@@ -67,6 +75,10 @@ class Marker extends Component {
       </div>
     )
   }
+}
+
+Marker.propTypes = {
+  onClick: PropTypes.func.isRequired
 }
 
 export default Marker

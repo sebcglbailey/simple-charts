@@ -22,6 +22,7 @@ class Graph extends Component {
 
     this.updateScrollPosition = this.updateScrollPosition.bind(this)
     this.handleScrollerClick = this.handleScrollerClick.bind(this)
+    this.handleKeyDown = this.handleKeyDown.bind(this)
 
     // Binding plotting functions
     this.plotGraph = this.plotGraph.bind(this)
@@ -32,6 +33,8 @@ class Graph extends Component {
   }
 
   componentDidMount() {
+
+    window.addEventListener("keydown", this.handleKeyDown)
 
     // this.scroller.scrollLeft = this.state.length * this.state.xWidth
     this.scroller.scrollLeft = this.svg.getBoundingClientRect().width - 1
@@ -146,7 +149,11 @@ class Graph extends Component {
 
     Func.scrollTo(this.scroller, posX, duration)
 
-    let {closestLine, closestSeries} = this.state.currentLine.getClosestLineOnClick(this.state.visibleLines, posX, mouseY)
+    let {closestLine, closestSeries} = this.state.currentLine ? this.state.currentLine.getClosestLineOnClick(this.state.visibleLines, posX, mouseY) : null
+
+    if (!closestSeries) {
+      return
+    }
 
     let visibleLines = this.lines.filter((line) => {
 
@@ -159,6 +166,43 @@ class Graph extends Component {
       currentSeries: closestSeries,
       visibleLines: visibleLines
     })
+
+  }
+
+  handleKeyDown(event) {
+
+    if (event.keyCode == 27) {
+
+      let goToLine;
+
+      let parent = this.state.currentLine && this.state.currentLine.series ? this.state.currentLine.series.parent : undefined
+
+      if (parent) {
+        goToLine = this.lines.filter((line) => {
+          return line.name == parent
+        })[0]
+      } else {
+        goToLine = this.lines.filter((line) => {
+          return line.series.default
+        })[0]
+      }
+
+      let visibleLines = this.lines.filter((line) => {
+
+        return goToLine.series.children.includes(line.name) || line == goToLine
+
+      })
+
+      if (goToLine !== this.state.currentLine) {
+        this.setState({
+          currentLine: goToLine,
+          currentSeries: goToLine.series,
+          visibleLines: visibleLines
+        })
+        this.scroller.scrollLeft = this.scroller.scrollLeft
+      }
+
+    }
 
   }
 

@@ -108,9 +108,15 @@ class Line {
 
   }
 
-  getValue(posX) {
+  getIndex(posX) {
 
     let index = Math.round(posX / this.props.xWidth)
+    return index
+
+  }
+
+  getValue(index) {
+
     let data = this.series.dataArray[index]
 
     return data
@@ -118,6 +124,7 @@ class Line {
   }
 
   getMarkerIntersection(posX) {
+    console.log(posX)
 
     let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
 
@@ -170,7 +177,7 @@ class Line {
     })
 
     let closestLine = visible[closestIndex]
-    let closestSeries = visible[closestIndex].series
+    let closestSeries = closestLine ? closestLine.series : null
 
     return {closestLine: closestLine, closestSeries: closestSeries}
 
