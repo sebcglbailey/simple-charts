@@ -52,57 +52,58 @@ class Canvas extends Component {
 
     }
 
-    if (nextProps.scrollLeft !== this.props.scrollLeft) {
+    if (nextProps.currentLine) {
 
-      if (nextProps.currentLine) {
-
-        if (markerPos) {
-          this.setState({
-            markerPos: {
-              static: false,
-              top: markerPos.y,
-              left: this.state.scrollLeft ? -this.state.scrollLeft + window.innerWidth / 2 : null
-            },
-            scrollLeft: nextProps.scrollLeft,
-            markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
-            markerIndex: markerIndex
-          })
-        } else if (!this.state.markerPos.static) {
-          this.setState({
-            markerPos: {
-              top: this.state.markerPos.top,
-              left: this.state.markerPos.left,
-              static: true
-            },
-            scrollLeft: nextProps.scrollLeft,
-            markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
-            markerIndex: markerIndex
-          })
-        } else {
-          this.setState({
-            scrollLeft: nextProps.scrollLeft,
-            markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
-            markerIndex: markerIndex
-          })
-        }
-
+      if (markerPos) {
+        this.setState({
+          markerPos: {
+            static: false,
+            top: markerPos.y,
+            left: this.state.scrollLeft ? -this.state.scrollLeft + window.innerWidth / 2 : null
+          },
+          scrollLeft: nextProps.scrollLeft,
+          markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
+          markerIndex: markerIndex,
+          currentSeries: nextProps.currentSeries,
+          currentLine: nextProps.currentLine,
+          visibleLines: nextProps.visibleLines
+        })
+      } else if (!this.state.markerPos.static) {
+        this.setState({
+          markerPos: {
+            top: this.state.markerPos.top,
+            left: this.state.markerPos.left,
+            static: true
+          },
+          scrollLeft: nextProps.scrollLeft,
+          markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
+          markerIndex: markerIndex,
+          currentSeries: nextProps.currentSeries,
+          currentLine: nextProps.currentLine,
+          visibleLines: nextProps.visibleLines
+        })
       } else {
-
         this.setState({
           scrollLeft: nextProps.scrollLeft,
-          markerValue: markerValue,
-          markerIndex: markerIndex
+          markerValue: markerValue ? markerValue : this.state.markerValue ? this.state.markerValue : null,
+          markerIndex: markerIndex,
+          currentSeries: nextProps.currentSeries,
+          currentLine: nextProps.currentLine,
+          visibleLines: nextProps.visibleLines
         })
-
       }
-    }
 
-    if (nextProps.currentSeries !== this.props.currentSeries) {
+    } else {
+
       this.setState({
+        scrollLeft: nextProps.scrollLeft,
+        markerValue: markerValue,
+        markerIndex: markerIndex,
         currentSeries: nextProps.currentSeries,
         currentLine: nextProps.currentLine,
         visibleLines: nextProps.visibleLines
       })
+
     }
 
   }
@@ -125,7 +126,14 @@ class Canvas extends Component {
           transform: `translate3d(${this.state.scrollLeft}px, 0, 0)`
         }}
       >
-
+        <Marker
+          left={this.state.markerPos.static ? this.state.markerPos.left : -this.state.scrollLeft + window.innerWidth / 2}
+          top={this.state.markerPos.top}
+          color={this.state.currentSeries ? this.state.currentSeries.color : null}
+          value={this.state.markerValue}
+          label={this.state.currentSeries ? this.state.currentSeries.name : null}
+          onClick={this.handleMarkerClick}
+        />
         <SVG
           ref={(elem) => {this.svg = this.svg ? this.svg : elem ? elem.svg : null}}
           length={this.state.length}

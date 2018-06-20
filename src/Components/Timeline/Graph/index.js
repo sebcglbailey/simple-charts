@@ -36,7 +36,6 @@ class Graph extends Component {
 
     window.addEventListener("keydown", this.handleKeyDown)
 
-    // this.scroller.scrollLeft = this.state.length * this.state.xWidth
     this.scroller.scrollLeft = this.svg.getBoundingClientRect().width - 1
 
     this.plotGraph()
@@ -155,17 +154,35 @@ class Graph extends Component {
       return
     }
 
-    let visibleLines = this.lines.filter((line) => {
+    if (closestLine !== this.state.currentLine) {
 
-      return closestSeries.children.includes(line.name) || line == closestLine
+      let visibleLines = this.lines.filter((line) => {
 
-    })
+        return closestSeries.children.includes(line.name) || line == closestLine
 
-    this.setState({
-      currentLine: closestLine,
-      currentSeries: closestSeries,
-      visibleLines: visibleLines
-    })
+      })
+
+      this.setState({
+        currentLine: closestLine,
+        currentSeries: closestSeries,
+        visibleLines: visibleLines
+      })
+
+    } else {
+
+      let markerIndex = this.state.currentLine.getIndex(posX)
+      let markerValue = this.state.currentLine.getValue(markerIndex)
+      
+      let seriesMonth = this.state.currentSeries && this.state.currentSeries.data ? this.state.currentSeries.data[markerIndex] : null
+      let seriesEvents = seriesMonth ? seriesMonth.events : undefined
+      
+      if (seriesEvents && seriesEvents.length > 0) {
+        this.setState({
+          currentEvents: seriesEvents
+        })
+      }
+
+    }
 
   }
 

@@ -17,6 +17,16 @@ class Timeline extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+
+    if (nextProps.xWidth !== this.props.xWidth) {
+
+      this.setState({ xWidth: nextProps.xWidth })
+
+    }
+
+  }
+
   render() {
     return (
       <div className={styles.container}>

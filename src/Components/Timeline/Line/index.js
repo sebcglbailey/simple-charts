@@ -15,6 +15,11 @@ class Line {
     this.snap = Snap(props.svg)
 
     this.plotData()
+
+    if (!this.series.parent) {
+      this.plotEvents()
+    }
+
     this.plotHelper()
 
   }
@@ -91,6 +96,35 @@ class Line {
 
   }
 
+  plotEvents() {
+
+    if (this.snap) {
+
+      this.events = []
+
+      this.series.data.forEach((dataPoint, index) => {
+        if (dataPoint.events) {
+          
+          let xCoord = index * this.props.xWidth
+          let yCoord = Func.convert(this.series.dataArray[index], this.series.min, this.series.max, this.props.canvasHeight) + this.props.margin
+
+          let event = this.snap.circle(xCoord, yCoord, 6)
+          event.attr({
+            fill: this.series.color,
+            stroke: "#fff",
+            strokeWidth: 3,
+            opacity: this.series.default ? 1 : 0.1
+          })
+
+          this.events.push(event)
+
+        }
+      })
+
+    }
+
+  }
+
   plotHelper() {
 
     let helperPath = `M0,0 V${this.svg.parentNode.offsetHeight}`
@@ -124,7 +158,6 @@ class Line {
   }
 
   getMarkerIntersection(posX) {
-    console.log(posX)
 
     let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
 
@@ -206,10 +239,20 @@ class Line {
 
   show(duration, opacity, strokeWidth) {
 
+    let eventOpacity = opacity
+
     opacity = opacity ? opacity : 1
     strokeWidth = strokeWidth ? strokeWidth : 2
 
     if (duration) {
+
+      if (this.events) {
+        this.events.forEach((event) => {
+          event.animate({
+            opacity: eventOpacity ? 0.1 : 1
+          })
+        }, duration, mina.easeinout)
+      }
 
       this.line.animate({
         opacity: opacity,
@@ -223,6 +266,14 @@ class Line {
       }, duration, mina.easeinout)
 
     } else {
+
+      if (this.events) {
+        this.events.forEach((event) => {
+          event.attr({
+            opacity: eventOpacity ? 0.1 : 1
+          })
+        })
+      }
 
       this.line.attr({
         opacity: opacity,
@@ -243,6 +294,14 @@ class Line {
 
     if (duration) {
 
+      if (this.events) {
+        this.events.forEach((event) => {
+          event.animate({
+            opacity: 0
+          }, duration, mina.easeinout)
+        })
+      }
+
       this.line.animate({
         opacity: 0,
         d: this.start
@@ -253,6 +312,14 @@ class Line {
       }, duration, mina.easeinout)
 
     } else {
+
+      if (this.events) {
+        this.events.forEach((event) => {
+          event.attr({
+            opacity: 0
+          })
+        })
+      }
 
       this.line.attr({
         opacity: 0,
