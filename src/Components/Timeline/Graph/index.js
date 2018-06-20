@@ -172,16 +172,27 @@ class Graph extends Component {
 
     }
 
-    let markerIndex = closestLine.getIndex(posX)
-    let markerValue = closestLine.getValue(markerIndex)
-    
-    let seriesMonth = closestSeries && closestSeries.data ? closestSeries.data[markerIndex] : null
-    let seriesEvents = seriesMonth ? seriesMonth.events : undefined
-    
-    if (seriesEvents && seriesEvents.length > 0) {
-      this.setState({
-        currentEvents: seriesEvents
-      })
+    let clickDiffToPoint = posX%this.state.xWidth
+    let ratio = window.innerWidth < 640 ? 0.2 : 0.05
+
+    if (clickDiffToPoint < this.state.xWidth*ratio || clickDiffToPoint > this.state.xWidth*(1-ratio)) {
+
+      let markerIndex = closestLine.getIndex(posX)
+      let markerValue = closestLine.getValue(markerIndex)
+      
+      let seriesMonth = closestSeries && closestSeries.data ? closestSeries.data[markerIndex] : null
+      let seriesEvents = seriesMonth ? seriesMonth.events : undefined
+      
+      if (seriesEvents && seriesEvents.length > 0) {
+        this.setState({
+          currentEvents: seriesEvents
+        })
+      } else {
+        this.setState({
+          currentEvents: null
+        })
+      }
+
     } else {
       this.setState({
         currentEvents: null
