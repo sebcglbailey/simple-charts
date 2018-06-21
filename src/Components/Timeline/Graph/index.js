@@ -175,6 +175,10 @@ class Graph extends Component {
 
     }
 
+    if (closestSeries.parent) {
+      return
+    }
+
     let clickDiffToPoint = posX%this.state.xWidth
     let ratio = window.innerWidth < 640 ? 0.2 : 0.05
 
@@ -188,17 +192,20 @@ class Graph extends Component {
       
       if (seriesEvents && seriesEvents.length > 0) {
         this.setState({
-          currentEvents: seriesEvents
+          currentEvents: seriesEvents,
+          eventsShowing: true
         })
       } else {
         this.setState({
-          currentEvents: null
+          currentEvents: null,
+          eventsShowing: false
         })
       }
 
     } else {
       this.setState({
-        currentEvents: null
+        currentEvents: null,
+        eventsShowing: false
       })
     }
 
@@ -207,6 +214,14 @@ class Graph extends Component {
   handleKeyDown(event) {
 
     if (event.keyCode == 27) {
+
+      if (this.state.eventsShowing) {
+        this.setState({
+          currentEvents: null,
+          eventsShowing: false
+        })
+        return
+      }
 
       let goToLine;
 
@@ -262,8 +277,12 @@ class Graph extends Component {
           scrollLeft={this.state.canvasLeft}
         />
         <Events
+          ref={(elem) => {this.events = elem}}
           eventList={this.state.currentEvents}
           margin={this.state.margin}
+          svgWidth={this.state.canvasWidth}
+          scrollLeft={this.state.canvasLeft}
+          currentLine={this.state.currentLine}
         />
         <Scroller
           ref={(elem) => {
