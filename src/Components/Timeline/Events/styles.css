@@ -13,3 +13,13 @@
   top: 33vh;
   left: 0;
 }
+
+.events {
+  color: #fff;
+  font-weight: 400;
+  padding: 2rem;
+}
+
+.eventList {
+  font-weight: 100;
+}

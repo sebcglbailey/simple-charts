@@ -55,9 +55,12 @@ class Graph extends Component {
 
   updateScrollPosition(scrollLeft) {
 
+    let markerIndex = this.state.currentLine.getIndex(scrollLeft + window.innerWidth/2)
+
     this.setState({
       canvasLeft: -scrollLeft,
-      scrollLeft: scrollLeft
+      scrollLeft: scrollLeft,
+      markerIndex: markerIndex
     })
 
   }
@@ -185,7 +188,6 @@ class Graph extends Component {
     if (clickDiffToPoint < this.state.xWidth*ratio || clickDiffToPoint > this.state.xWidth*(1-ratio)) {
 
       let markerIndex = closestLine.getIndex(posX)
-      let markerValue = closestLine.getValue(markerIndex)
       
       let seriesMonth = closestSeries && closestSeries.data ? closestSeries.data[markerIndex] : null
       let seriesEvents = seriesMonth ? seriesMonth.events : undefined
@@ -193,7 +195,8 @@ class Graph extends Component {
       if (seriesEvents && seriesEvents.length > 0) {
         this.setState({
           currentEvents: seriesEvents,
-          eventsShowing: true
+          eventsShowing: true,
+          markerIndex: markerIndex
         })
       } else {
         this.setState({
@@ -283,6 +286,8 @@ class Graph extends Component {
           svgWidth={this.state.canvasWidth}
           scrollLeft={this.state.canvasLeft}
           currentLine={this.state.currentLine}
+          currentSeries={this.state.currentSeries}
+          eventIndex={this.state.markerIndex}
         />
         <Scroller
           ref={(elem) => {

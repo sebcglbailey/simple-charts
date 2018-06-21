@@ -14,6 +14,7 @@ class Events extends Component {
 
     this.hide = this.hide.bind(this)
     this.show = this.show.bind(this)
+    this.updateEvents = this.updateEvents.bind(this)
   }
 
   componentDidMount() {
@@ -32,7 +33,11 @@ class Events extends Component {
 
     if (nextProps.eventList && nextProps.eventList.length > 0 && nextProps.eventList !== this.props.eventList) {
 
-      this.show(nextProps.currentLine)
+      this.show(nextProps)
+
+    } else if (this.props.eventList && nextProps.eventIndex !== this.props.eventIndex) {
+
+      this.updateEvents(nextProps)
 
     } else if (nextProps.eventList == null) {
 
@@ -41,6 +46,7 @@ class Events extends Component {
     }
 
     if (nextProps.scrollLeft !== this.props.scrollLeft) {
+
       this.setState({
         scrollLeft: nextProps.scrollLeft,
         svgWidth: nextProps.svgWidth
@@ -59,13 +65,64 @@ class Events extends Component {
 
   }
 
-  show(currentLine) {
+  show(nextProps) {
+
+    let {currentLine, currentSeries, eventIndex} = nextProps
 
     let line = currentLine && currentLine.line ? currentLine.line.node : null
     let lineCopy = line.cloneNode()
     this.svg.appendChild(lineCopy)
 
-    this.setState({opacity: 1})
+    let events = currentSeries && currentSeries.data && currentSeries.data[eventIndex] ? currentSeries.data[eventIndex].events : null
+
+    let eventArray = []
+    if (events) {
+      events.forEach((event, index) => {
+        eventArray.push(
+          <li
+            key={`event-${index+1}`}
+            dangerouslySetInnerHTML={{__html: event.text}}>
+          </li>
+        )
+      })
+    } else {
+      eventArray.push(
+        <li key="no-events">No changes to your report.</li>
+      )
+    }
+
+    this.setState({
+      opacity: 1,
+      events: eventArray
+    })
+
+  }
+
+  updateEvents(nextProps) {
+
+    let {currentSeries, eventIndex} = nextProps
+
+    let events = currentSeries && currentSeries.data && currentSeries.data[eventIndex] ? currentSeries.data[eventIndex].events : null
+
+    let eventArray = []
+    if (events) {
+      events.forEach((event, index) => {
+        eventArray.push(
+          <li
+            key={`event-${index+1}`}
+            dangerouslySetInnerHTML={{__html: event.text}}>
+          </li>
+        )
+      })
+    } else {
+      eventArray.push(
+        <li key="no-events">No changes to your report.</li>
+      )
+    }
+
+    this.setState({
+      events: eventArray
+    })
 
   }
 
@@ -80,6 +137,12 @@ class Events extends Component {
           opacity: this.state.opacity
         }}
       >
+        <div className={styles.events}>
+          Events added:
+          <ul className={styles.eventList}>
+            {this.state.events}
+          </ul>
+        </div>
         <svg
           ref={(elem) => {this.svg = elem}}
           className={styles.svg}
