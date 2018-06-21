@@ -55,7 +55,10 @@ class Graph extends Component {
 
   updateScrollPosition(scrollLeft) {
 
-    this.setState({ canvasLeft: -scrollLeft })
+    this.setState({
+      canvasLeft: -scrollLeft,
+      scrollLeft: scrollLeft
+    })
 
   }
 
@@ -257,9 +260,6 @@ class Graph extends Component {
           length={this.state.length}
           xWidth={this.state.xWidth}
           scrollLeft={this.state.canvasLeft}
-          visibleLines={this.state.visibleLines}
-          currentLine={this.state.currentLine}
-          currentSeries={this.state.currentSeries}
         />
         <Events
           eventList={this.state.currentEvents}
@@ -272,6 +272,18 @@ class Graph extends Component {
           onScroll={this.updateScrollPosition}
           onClick={this.handleScrollerClick}
           width={this.state.canvasWidth + window.innerWidth / 2}
+        />
+        <Marker
+          top={this.state.markerTop}
+          color={this.state.currentSeries ? this.state.currentSeries.color : null}
+          value={this.state.markerValue}
+          label={this.state.currentSeries ? this.state.currentSeries.name : null}
+          currentSeries={this.state.currentSeries}
+          currentLine={this.state.currentLine}
+          visibleLines={this.state.visibleLines}
+          canvasLeft={this.state.canvasLeft}
+          scrollLeft={this.state.scrollLeft}
+          margin={this.state.margin}
         />
       </div>
     )

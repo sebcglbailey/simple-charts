@@ -8,17 +8,13 @@ class Marker extends Component {
     super(props)
 
     this.state = {
-      line: this.props.line,
-      value: this.props.value,
       label: this.props.label,
+      value: this.props.value,
       style: {
-        backgroundColor: this.props.color,
-        left: this.props.left && this.props.left !== NaN ? this.props.left : 0,
-        top: this.props.top && this.props.top !== NaN ? this.props.top : 0
+        backgroundColor: this.props.color
       }
     }
-
-    this.updateValue = this.updateValue.bind(this)
+    
   }
 
   componentDidMount() {
@@ -28,26 +24,26 @@ class Marker extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    let markerIndex, markerValue, markerPos, markerStatic;
 
-    let left = nextProps.left && nextProps.left !== NaN ? nextProps.left : 0
-    let top = nextProps.top && nextProps.top !== NaN ? nextProps.top : 0
+    if (nextProps.currentLine && nextProps.scrollLeft) {
+      markerIndex = nextProps.currentLine.getIndex(nextProps.scrollLeft + window.innerWidth/2)
+      markerValue = nextProps.currentLine.getValue(markerIndex)
+      markerValue = nextProps.currentLine && nextProps.currentLine.series && nextProps.currentLine.series.formatValue && typeof(markerValue) == "number" ? nextProps.currentLine.series.formatValue(markerValue) : markerValue
+      markerPos = nextProps.currentLine.getMarkerIntersection(nextProps.scrollLeft + window.innerWidth / 2)
+      markerPos = markerPos[0] ? markerPos[0] : null
+      markerStatic = markerPos ? false : this.state.markerLastLeft ? this.state.markerLastLeft - nextProps.scrollLeft - window.innerWidth/2 : null
+    }
 
     this.setState({
-      value: nextProps.value,
-      label: nextProps.label,
+      label: nextProps.currentSeries ? nextProps.currentSeries.name : null,
+      value: markerValue ? markerValue : this.state.value,
+      markerLastLeft: markerPos ? markerPos.x : this.state.markerLastLeft,
       style: {
-        backgroundColor: nextProps.color,
-        left: left,
-        top: top
+        backgroundColor: nextProps.currentSeries ? nextProps.currentSeries.color : null,
+        top: markerPos ? markerPos.y + nextProps.margin : this.state.style && this.state.style.top ? this.state.style.top : null,
+        transform: markerStatic ? `translateX(${-this.marker.offsetWidth/2 + markerStatic}px) translateY(-50%)` : `translateX(-50%) translateY(-50%)`
       }
-    })
-
-  }
-
-  updateValue(value) {
-
-    this.setState({
-      value: value
     })
 
   }
@@ -77,8 +73,6 @@ class Marker extends Component {
   }
 }
 
-Marker.propTypes = {
-  onClick: PropTypes.func.isRequired
-}
+
 
 export default Marker
