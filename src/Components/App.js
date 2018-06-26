@@ -5,12 +5,13 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Chart, { Marker } from './Chart/';
 import Timeline from './Timeline/';
 
-import addEmptyData from './Chart/src/addEmptyData';
-import Func from './Chart/src/functions';
+import addEmptyData from './Timeline/src/addEmptyData';
+import formatUndefined from './Timeline/src/formatUndefined'
+import Func from './Timeline/src/functions';
 
 import styles from './App.css';
 
-import data from '../data/test.json';
+import data from '../data/test2.json';
 
 let testData = data.data[0].values.map((score) => {
   return score.score
@@ -90,7 +91,8 @@ let series = [
       return Func.formatMoney(value)
     },
     color: "#f3cddd",
-    children: ["Credit Score", "Short Term Debt"]
+    children: ["Credit Score", "Short Term Debt"],
+    min: 0
   }
 ]
 
@@ -102,25 +104,41 @@ series.forEach((series) => {
   })
   series.dataArray = dataArray
 
-  let seriesMin = Func.getSmallest(dataArray)
   let seriesMax = Func.getLargest(dataArray)
 
-  series.min = typeof(series.min) == "number" ? series.min : seriesMin
   series.max = typeof(series.max) == "number" ? series.max : seriesMax
 
 })
 
-let stdMin = series[4].min
-let stdMax = series[4].max
+let stdMaxes = series.map((series) => {
+  if (series.name == "Short Term Debt"
+    || series.name == "Spending"
+    || series.name == "Payments"
+    || series.name == "Credit Limit") {
+      return series.max
+  } else {
+    return
+  }
+})
+let stdMax = Func.getLargest(stdMaxes)
 
 series.forEach((series) => {
   if (series.name == "Short Term Debt"
     || series.name == "Spending"
-    || series.name == "Payments") {
+    || series.name == "Payments"
+    || series.name == "Credit Limit") {
       series.min = 0
       series.max = stdMax
   }
 })
+
+series.forEach((series, seriesIndex) => {
+
+  formatUndefined(series)
+
+})
+
+console.log(series[4])
 
 let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth) + 1
 
