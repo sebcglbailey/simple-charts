@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import styles from './styles.css';
 
 import SVG from '../SVG/';
-import Marker from '../Marker/';
 
 class Canvas extends Component {
   constructor(props) {

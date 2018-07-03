@@ -157,7 +157,109 @@ class Line {
 
   }
 
+  getIntersectionsOfChildren(visibleLines) {
+
+    let intersections = []
+    let currentIntersection = Snap ? Snap.path.intersection(this.line, this.markerHelper) : null
+    currentIntersection = currentIntersection && currentIntersection[0] ? currentIntersection[0] : null
+
+    let otherLines = visibleLines.filter((line) => {
+      return line.line !== this.line
+    })
+
+    visibleLines.forEach((line) => {
+      let intersection = Snap ? Snap.path.intersection(line.line, this.markerHelper) : null
+      intersection = intersection && intersection[0] ? intersection[0] : null
+      intersections.push(intersection)
+    })
+
+    return {currentIntersection: currentIntersection, intersections: intersections}
+
+  }
+
+  getLineUp(children, visibleLines, series) {
+
+    let ignore = series.filter((series) => {
+      return series.default
+    })
+    visibleLines = visibleLines.filter((line) => {
+      return !ignore.includes(line.series)
+    })
+
+    let {currentIntersection, intersections} = this.getIntersectionsOfChildren(visibleLines)
+
+    let goToIndex;
+    let closestDistance;
+
+    intersections.forEach((intersection, index) => {
+
+      if (intersection && closestDistance == undefined) {
+        closestDistance = currentIntersection.y - intersection.y > 0 ? currentIntersection.y - intersection.y : undefined
+        goToIndex = currentIntersection.y - intersection.y > 0 ? index : undefined
+      }
+
+      if (intersection && currentIntersection.y - intersection.y < closestDistance && currentIntersection.y - intersection.y > 0) {
+        closestDistance = currentIntersection.y - intersection.y
+        goToIndex = index
+      }
+
+    })
+
+    goToIndex = goToIndex || goToIndex == 0 ? goToIndex : 0
+
+    let closestLine = visibleLines[goToIndex]
+
+    if (children.includes(closestLine.name)) {
+      return {lineUp: closestLine, seriesUp: closestLine.series}
+    } else {
+      return {lineUp: null, seriesUp: null}
+    }
+
+  }
+
+  getLineDown(children, visibleLines, series) {
+
+    let ignore = series.filter((series) => {
+      return series.default
+    })
+    visibleLines = visibleLines.filter((line) => {
+      return !ignore.includes(line.series)
+    })
+
+    let {currentIntersection, intersections} = this.getIntersectionsOfChildren(visibleLines)
+
+    let goToIndex;
+    let closestDistance;
+
+    intersections.forEach((intersection, index) => {
+
+      if (intersection && closestDistance == undefined) {
+        closestDistance = intersection.y - currentIntersection.y > 0 ? intersection.y - currentIntersection.y : undefined
+        goToIndex = intersection.y - currentIntersection.y > 0 ? index : undefined
+      }
+
+      if (intersection && intersection.y - currentIntersection.y < closestDistance && intersection.y - currentIntersection.y > 0) {
+        closestDistance = intersection.y - currentIntersection.y
+        goToIndex = index
+      }
+
+    })
+
+    goToIndex = goToIndex || goToIndex == 0 ? goToIndex : 0
+
+    let closestLine = visibleLines[goToIndex]
+
+    if (children.includes(closestLine.name)) {
+      return closestLine
+    } else {
+      return null
+    }
+
+  }
+
   getMarkerIntersection(posX) {
+
+    posX = posX == 0 ? 1 : posX - 1
 
     let helperPath = `M${posX},0 V${this.svg.parentNode.offsetHeight}`
 

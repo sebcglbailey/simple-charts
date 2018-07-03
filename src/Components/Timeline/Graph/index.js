@@ -25,6 +25,12 @@ class Graph extends Component {
     this.handleScrollerClick = this.handleScrollerClick.bind(this)
     this.handleKeyDown = this.handleKeyDown.bind(this)
 
+    // Binding keydown functions
+    this.moveToParent = this.moveToParent.bind(this)
+    this.moveUp = this.moveUp.bind(this)
+    this.moveDown = this.moveDown.bind(this)
+    this.moveSide = this.moveSide.bind(this)
+
     // Binding plotting functions
     this.plotGraph = this.plotGraph.bind(this)
     this.drawLines = this.drawLines.bind(this)
@@ -150,10 +156,18 @@ class Graph extends Component {
     let mouseY = event.clientY - this.container.getBoundingClientRect().top
 
     let posX = mouseX - window.innerWidth / 2 + this.scroller.scrollLeft
+
+    let newScroll = Math.round(posX/200)*200
+    if (newScroll == this.canvas.offsetWidth) {
+      newScroll -= 1
+    } else if (newScroll == 0) {
+      newScroll = 1
+    }
+
     let duration = Math.abs(window.innerWidth/2 - mouseX)
     duration = Func.modulate(duration, [0, window.innerWidth/2], [200, 300])
 
-    Func.scrollTo(this.scroller, posX, duration)
+    Func.scrollTo(this.scroller, newScroll, duration)
 
     let {closestLine, closestSeries} = this.state.currentLine ? this.state.currentLine.getClosestLineOnClick(this.state.visibleLines, posX, mouseY) : null
 
@@ -214,46 +228,143 @@ class Graph extends Component {
 
   }
 
+  moveUp() {
+    let {lineUp, seriesUp} = this.state.currentLine.getLineUp(this.state.currentSeries.children, this.state.visibleLines, this.state.series)
+
+    if (lineUp && seriesUp) {
+
+        let visibleLines = this.lines.filter((line) => {
+          return seriesUp.children.includes(line.name) || line == lineUp
+        })
+
+        this.setState({
+          currentLine: lineUp,
+          currentSeries: seriesUp,
+          visibleLines: visibleLines
+        })
+
+    }
+
+  }
+
+  moveDown() {
+    let lineDown = this.state.currentLine.getLineDown(this.state.currentSeries.children, this.state.visibleLines, this.state.series)
+
+    if (lineDown) {
+
+      let seriesDown = this.state.series.filter((series) => {
+        return series.name == lineDown.name
+      })
+
+      seriesDown = seriesDown ? seriesDown[0] : undefined
+
+      if (seriesDown) {
+
+        let visibleLines = this.lines.filter((line) => {
+          return seriesDown.children.includes(line.name) || line == lineDown
+        })
+
+        this.setState({
+          currentLine: lineDown,
+          currentSeries: seriesDown,
+          visibleLines: visibleLines
+        })
+      }
+
+    }
+
+  }
+
+  moveSide(direction) {
+
+    let move, diff;
+    let currentScroll = this.scroller.scrollLeft
+
+    if (direction == "left") {
+      diff = currentScroll - (Math.floor(currentScroll/200) * 200)
+      if (diff == 0) {
+        diff = 200
+      }
+      move = -diff
+    } else if (direction == "right") {
+      diff = currentScroll - (Math.floor(currentScroll/200) * 200)
+      move = 200 - diff
+    }
+
+    let newScroll = this.scroller.scrollLeft + move
+
+    if (newScroll == this.canvas.offsetWidth) {
+      newScroll -= 1
+    } else if (newScroll == 0) {
+      newScroll = 1
+    }
+
+    Func.scrollTo(this.scroller, newScroll, 200)
+
+  }
+
+  moveToParent() {
+
+    if (this.state.eventsShowing) {
+      this.setState({
+        currentEvents: null,
+        eventsShowing: false
+      })
+      return
+    }
+
+    let goToLine;
+
+    let parent = this.state.currentLine && this.state.currentLine.series ? this.state.currentLine.series.parent : undefined
+
+    if (parent) {
+      goToLine = this.lines.filter((line) => {
+        return line.name == parent
+      })[0]
+    } else {
+      goToLine = this.lines.filter((line) => {
+        return line.series.default
+      })[0]
+    }
+
+    let visibleLines = this.lines.filter((line) => {
+
+      return goToLine.series.children.includes(line.name) || line == goToLine
+
+    })
+
+    if (goToLine !== this.state.currentLine) {
+      this.setState({
+        currentLine: goToLine,
+        currentSeries: goToLine.series,
+        visibleLines: visibleLines
+      })
+      this.scroller.scrollLeft = this.scroller.scrollLeft
+    }
+
+  }
+
   handleKeyDown(event) {
 
     if (event.keyCode == 27) {
 
-      if (this.state.eventsShowing) {
-        this.setState({
-          currentEvents: null,
-          eventsShowing: false
-        })
-        return
-      }
+      this.moveToParent()
 
-      let goToLine;
+    } else if (event.keyCode == 38) {
 
-      let parent = this.state.currentLine && this.state.currentLine.series ? this.state.currentLine.series.parent : undefined
+      this.moveUp()
 
-      if (parent) {
-        goToLine = this.lines.filter((line) => {
-          return line.name == parent
-        })[0]
-      } else {
-        goToLine = this.lines.filter((line) => {
-          return line.series.default
-        })[0]
-      }
+    } else if (event.keyCode == 40) {
 
-      let visibleLines = this.lines.filter((line) => {
+      this.moveDown()
 
-        return goToLine.series.children.includes(line.name) || line == goToLine
+    } else if (event.keyCode == 37) {
 
-      })
+      this.moveSide("left")
 
-      if (goToLine !== this.state.currentLine) {
-        this.setState({
-          currentLine: goToLine,
-          currentSeries: goToLine.series,
-          visibleLines: visibleLines
-        })
-        this.scroller.scrollLeft = this.scroller.scrollLeft
-      }
+    } else if (event.keyCode == 39) {
+
+      this.moveSide("right")
 
     }
 

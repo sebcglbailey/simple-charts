@@ -138,8 +138,6 @@ series.forEach((series, seriesIndex) => {
 
 })
 
-console.log(series[4])
-
 let length = (data.index.maxYear - data.index.minYear) * 12 + (data.index.maxMonth - data.index.minMonth) + 1
 
 class App extends Component {
