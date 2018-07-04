@@ -36,6 +36,7 @@ class Graph extends Component {
     this.drawLines = this.drawLines.bind(this)
 
     this.showVisibleLines = this.showVisibleLines.bind(this)
+    this.showEvents = this.showEvents.bind(this)
 
   }
 
@@ -201,24 +202,30 @@ class Graph extends Component {
 
     if (clickDiffToPoint < this.state.xWidth*ratio || clickDiffToPoint > this.state.xWidth*(1-ratio)) {
 
-      let markerIndex = closestLine.getIndex(posX)
-      
-      let seriesMonth = closestSeries && closestSeries.data ? closestSeries.data[markerIndex] : null
-      let seriesEvents = seriesMonth ? seriesMonth.events : undefined
-      
-      if (seriesEvents && seriesEvents.length > 0) {
-        this.setState({
-          currentEvents: seriesEvents,
-          eventsShowing: true,
-          markerIndex: markerIndex
-        })
-      } else {
-        this.setState({
-          currentEvents: null,
-          eventsShowing: false
-        })
-      }
+      this.showEvents(closestLine, closestSeries, posX)
 
+    } else {
+      this.setState({
+        currentEvents: null,
+        eventsShowing: false
+      })
+    }
+
+  }
+
+  showEvents(line, series, posX) {
+
+    let markerIndex = line.getIndex(posX)
+      
+    let seriesMonth = series && series.data ? series.data[markerIndex] : null
+    let seriesEvents = seriesMonth ? seriesMonth.events : undefined
+    
+    if (seriesEvents && seriesEvents.length > 0) {
+      this.setState({
+        currentEvents: seriesEvents,
+        eventsShowing: true,
+        markerIndex: markerIndex
+      })
     } else {
       this.setState({
         currentEvents: null,
@@ -356,6 +363,10 @@ class Graph extends Component {
     } else if (event.keyCode == 39) {
 
       this.moveSide("right")
+
+    } else if (event.keyCode == 13) {
+
+      this.showEvents(this.state.currentLine, this.state.currentSeries, this.scroller.scrollLeft)
 
     }
 
