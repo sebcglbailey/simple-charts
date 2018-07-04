@@ -248,28 +248,19 @@ class Graph extends Component {
   }
 
   moveDown() {
-    let lineDown = this.state.currentLine.getLineDown(this.state.currentSeries.children, this.state.visibleLines, this.state.series)
+    let {lineDown, seriesDown} = this.state.currentLine.getLineDown(this.state.currentSeries.children, this.state.visibleLines, this.state.series)
 
-    if (lineDown) {
+    if (lineDown && seriesDown) {
 
-      let seriesDown = this.state.series.filter((series) => {
-        return series.name == lineDown.name
+      let visibleLines = this.lines.filter((line) => {
+        return seriesDown.children.includes(line.name) || line == lineDown
       })
 
-      seriesDown = seriesDown ? seriesDown[0] : undefined
-
-      if (seriesDown) {
-
-        let visibleLines = this.lines.filter((line) => {
-          return seriesDown.children.includes(line.name) || line == lineDown
-        })
-
-        this.setState({
-          currentLine: lineDown,
-          currentSeries: seriesDown,
-          visibleLines: visibleLines
-        })
-      }
+      this.setState({
+        currentLine: lineDown,
+        currentSeries: seriesDown,
+        visibleLines: visibleLines
+      })
 
     }
 

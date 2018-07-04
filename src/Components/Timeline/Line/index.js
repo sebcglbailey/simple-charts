@@ -205,11 +205,9 @@ class Line {
 
     })
 
-    goToIndex = goToIndex || goToIndex == 0 ? goToIndex : 0
+    let closestLine = goToIndex >= 0 ? visibleLines[goToIndex] : null
 
-    let closestLine = visibleLines[goToIndex]
-
-    if (children.includes(closestLine.name)) {
+    if (closestLine && children.includes(closestLine.name)) {
       return {lineUp: closestLine, seriesUp: closestLine.series}
     } else {
       return {lineUp: null, seriesUp: null}
@@ -245,14 +243,12 @@ class Line {
 
     })
 
-    goToIndex = goToIndex || goToIndex == 0 ? goToIndex : 0
+    let closestLine = goToIndex >= 0 ? visibleLines[goToIndex] : null
 
-    let closestLine = visibleLines[goToIndex]
-
-    if (children.includes(closestLine.name)) {
-      return closestLine
+    if (closestLine && children.includes(closestLine.name)) {
+      return {lineDown: closestLine, seriesDown: closestLine.series}
     } else {
-      return null
+      return {lineDown: null, seriesDown: null}
     }
 
   }

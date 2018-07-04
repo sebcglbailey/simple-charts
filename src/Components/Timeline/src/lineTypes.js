@@ -15,7 +15,7 @@ const Plot = {
 
     let canvasBottom = margin ? height + margin : height;
 
-    let bgAdd = ` V${canvasBottom} H${startIndex * xWidth} Z`
+    let bgAdd = ` V${canvasBottom} H${startIndex * xWidth - 1} Z`
 
     return string + bgAdd
 
@@ -32,7 +32,11 @@ const Plot = {
       if (value && value !== NaN && !started) {
 
         started = true
-        return `M${xWidth * index},${bottom} L`
+        return `M${xWidth * index - 1},${bottom} L`
+
+      } else if ((value || value == 0) && value !== NaN && started && index == data.length-1) {
+
+        return `${xWidth * index + 1},${bottom} `
 
       } else if ((value || value == 0) && value !== NaN && started) {
 
@@ -65,7 +69,11 @@ const Plot = {
       if ((value || value == 0) && value !== NaN && !started) {
 
         started = true
-        return `M${xWidth * index},${value},${value} L`
+        return `M${xWidth * index - 1},${value},${value} L`
+
+      } else if ((value || value == 0) && value !== NaN && started && index == data.length-1) {
+
+        return `${xWidth * index + 1},${value} `
 
       } else if ((value || value == 0) && value !== NaN && started) {
 
@@ -103,7 +111,14 @@ const Plot = {
       if ((value || value == 0) && value !== NaN && !started) {
 
         started = true;
-        return `M${xWidth * index},${value},${value} S`
+        return `M${xWidth * index - 1},${value},${value} S`
+
+      } else if ((value || value == 0) && value !== NaN && started && index == data.length-1) {
+
+        diff = value - prevVal
+        prevHandle = value - (diff/2)
+
+        return `${xWidth * index - xWidth/2},${prevHandle} ${xWidth * index + 1},${value} `
 
       } else if ((value || value == 0) && value !== NaN) {
 
@@ -149,7 +164,7 @@ const Plot = {
         started = true
         
         diff = nextVal - value
-        return `M${xWidth * index},${value} C${(xWidth * index) + xWidth/2},${value + diff/2} `
+        return `M${xWidth * index - 1},${value} C${(xWidth * index) + xWidth/2},${value + diff/2} `
 
       } else if (index < data.length - 1 && (value || value == 0) && value !== NaN) {
 
@@ -190,7 +205,7 @@ const Plot = {
       } else if ((value || value == 0) && value !== NaN) {
 
         diff = value - prevVal
-        return `${index * xWidth - xWidth/2},${value - diff/2} ${index * xWidth},${value} `
+        return `${index * xWidth - xWidth/2},${value - diff/2} ${index * xWidth + 1},${value} `
 
       } else {
         return
